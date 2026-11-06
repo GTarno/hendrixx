@@ -1,0 +1,3655 @@
+{
+  "version": 1,
+  "tuning": [
+    "E",
+    "A",
+    "D",
+    "G",
+    "B",
+    "E"
+  ],
+  "chords": [
+    {
+      "id": "C",
+      "root": "C",
+      "quality": "maj",
+      "labelCifra": "C",
+      "labelPt": "Dó",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "C",
+        "E",
+        "G",
+        "C",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 1,
+      "aliases": []
+    },
+    {
+      "id": "Db",
+      "root": "Db",
+      "quality": "maj",
+      "labelCifra": "Db",
+      "labelPt": "Réb",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 4,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 4,
+      "notes": [
+        "Db",
+        "Ab",
+        "Db",
+        "F",
+        "Ab"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": [
+        "C#"
+      ]
+    },
+    {
+      "id": "D",
+      "root": "D",
+      "quality": "maj",
+      "labelCifra": "D",
+      "labelPt": "Ré",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "muted"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "D",
+        "A",
+        "D",
+        "F#"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 1,
+      "aliases": []
+    },
+    {
+      "id": "Eb",
+      "root": "Eb",
+      "quality": "maj",
+      "labelCifra": "Eb",
+      "labelPt": "Mib",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 6,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 6,
+      "notes": [
+        "Eb",
+        "Bb",
+        "Eb",
+        "G",
+        "Bb"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": [
+        "D#"
+      ]
+    },
+    {
+      "id": "E",
+      "root": "E",
+      "quality": "maj",
+      "labelCifra": "E",
+      "labelPt": "Mi",
+      "strings": [
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "E",
+        "B",
+        "E",
+        "G#",
+        "B",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 1,
+      "aliases": []
+    },
+    {
+      "id": "F",
+      "root": "F",
+      "quality": "maj",
+      "labelCifra": "F",
+      "labelPt": "Fá",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "F",
+        "C",
+        "F",
+        "A",
+        "C",
+        "F"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 1,
+      "aliases": []
+    },
+    {
+      "id": "F#",
+      "root": "F#",
+      "quality": "maj",
+      "labelCifra": "F#",
+      "labelPt": "Fá#",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 2,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "F#",
+        "C#",
+        "F#",
+        "A#",
+        "C#",
+        "F#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": [
+        "Gb"
+      ]
+    },
+    {
+      "id": "G",
+      "root": "G",
+      "quality": "maj",
+      "labelCifra": "G",
+      "labelPt": "Sol",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "G",
+        "B",
+        "D",
+        "G",
+        "B",
+        "G"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 1,
+      "aliases": []
+    },
+    {
+      "id": "Ab",
+      "root": "Ab",
+      "quality": "maj",
+      "labelCifra": "Ab",
+      "labelPt": "Láb",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 4,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 4,
+      "notes": [
+        "Ab",
+        "Eb",
+        "Ab",
+        "C",
+        "Eb",
+        "Ab"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": [
+        "G#"
+      ]
+    },
+    {
+      "id": "A",
+      "root": "A",
+      "quality": "maj",
+      "labelCifra": "A",
+      "labelPt": "Lá",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "A",
+        "E",
+        "A",
+        "C#",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 1,
+      "aliases": []
+    },
+    {
+      "id": "Bb",
+      "root": "Bb",
+      "quality": "maj",
+      "labelCifra": "Bb",
+      "labelPt": "Sib",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "Bb",
+        "F",
+        "Bb",
+        "D",
+        "F"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": [
+        "A#"
+      ]
+    },
+    {
+      "id": "B",
+      "root": "B",
+      "quality": "maj",
+      "labelCifra": "B",
+      "labelPt": "Si",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 2,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "B",
+        "F#",
+        "B",
+        "D#",
+        "F#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 1,
+      "aliases": []
+    },
+    {
+      "id": "Cm",
+      "root": "C",
+      "quality": "min",
+      "labelCifra": "Cm",
+      "labelPt": "Dó menor",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 3,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 3,
+      "notes": [
+        "C",
+        "G",
+        "C",
+        "Eb",
+        "G"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": []
+    },
+    {
+      "id": "C#m",
+      "root": "C#",
+      "quality": "min",
+      "labelCifra": "C#m",
+      "labelPt": "Dó# menor",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 4,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 4,
+      "notes": [
+        "C#",
+        "G#",
+        "C#",
+        "E",
+        "G#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": [
+        "Dbm"
+      ]
+    },
+    {
+      "id": "Dm",
+      "root": "D",
+      "quality": "min",
+      "labelCifra": "Dm",
+      "labelPt": "Ré menor",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "muted"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "D",
+        "A",
+        "D",
+        "F"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 1,
+      "aliases": []
+    },
+    {
+      "id": "Ebm",
+      "root": "Eb",
+      "quality": "min",
+      "labelCifra": "Ebm",
+      "labelPt": "Mib menor",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 6,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 6,
+      "notes": [
+        "Eb",
+        "Bb",
+        "Eb",
+        "Gb",
+        "Bb"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": [
+        "D#m"
+      ]
+    },
+    {
+      "id": "Em",
+      "root": "E",
+      "quality": "min",
+      "labelCifra": "Em",
+      "labelPt": "Mi menor",
+      "strings": [
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "E",
+        "B",
+        "E",
+        "G",
+        "B",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 1,
+      "aliases": []
+    },
+    {
+      "id": "Fm",
+      "root": "F",
+      "quality": "min",
+      "labelCifra": "Fm",
+      "labelPt": "Fá menor",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "F",
+        "C",
+        "F",
+        "Ab",
+        "C",
+        "F"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": []
+    },
+    {
+      "id": "F#m",
+      "root": "F#",
+      "quality": "min",
+      "labelCifra": "F#m",
+      "labelPt": "Fá# menor",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 2,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "F#",
+        "C#",
+        "F#",
+        "A",
+        "C#",
+        "F#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": [
+        "Gbm"
+      ]
+    },
+    {
+      "id": "Gm",
+      "root": "G",
+      "quality": "min",
+      "labelCifra": "Gm",
+      "labelPt": "Sol menor",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 3,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 3,
+      "notes": [
+        "G",
+        "D",
+        "G",
+        "Bb",
+        "D",
+        "G"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": []
+    },
+    {
+      "id": "G#m",
+      "root": "G#",
+      "quality": "min",
+      "labelCifra": "G#m",
+      "labelPt": "Sol# menor",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 4,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 4,
+      "notes": [
+        "G#",
+        "D#",
+        "G#",
+        "B",
+        "D#",
+        "G#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": [
+        "Abm"
+      ]
+    },
+    {
+      "id": "Am",
+      "root": "A",
+      "quality": "min",
+      "labelCifra": "Am",
+      "labelPt": "Lá menor",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "A",
+        "E",
+        "A",
+        "C",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 1,
+      "aliases": []
+    },
+    {
+      "id": "Bbm",
+      "root": "Bb",
+      "quality": "min",
+      "labelCifra": "Bbm",
+      "labelPt": "Sib menor",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "Bb",
+        "F",
+        "Bb",
+        "Db",
+        "F"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": [
+        "A#m"
+      ]
+    },
+    {
+      "id": "Bm",
+      "root": "B",
+      "quality": "min",
+      "labelCifra": "Bm",
+      "labelPt": "Si menor",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 2,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "B",
+        "F#",
+        "B",
+        "D",
+        "F#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 2,
+      "aliases": []
+    },
+    {
+      "id": "C7",
+      "root": "C",
+      "quality": "7",
+      "labelCifra": "C7",
+      "labelPt": "Dó 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "C",
+        "E",
+        "Bb",
+        "C",
+        "E"
+      ],
+      "difficulty": 2,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Db7",
+      "root": "Db",
+      "quality": "7",
+      "labelCifra": "Db7",
+      "labelPt": "Réb 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 4,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 4,
+      "notes": [
+        "Db",
+        "Ab",
+        "Cb",
+        "F",
+        "Ab"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "C#7"
+      ]
+    },
+    {
+      "id": "D7",
+      "root": "D",
+      "quality": "7",
+      "labelCifra": "D7",
+      "labelPt": "Ré 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "muted"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "D",
+        "A",
+        "C",
+        "F#"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Eb7",
+      "root": "Eb",
+      "quality": "7",
+      "labelCifra": "Eb7",
+      "labelPt": "Mib 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 6,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 6,
+      "notes": [
+        "Eb",
+        "Bb",
+        "Db",
+        "G",
+        "Bb"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "D#7"
+      ]
+    },
+    {
+      "id": "E7",
+      "root": "E",
+      "quality": "7",
+      "labelCifra": "E7",
+      "labelPt": "Mi 7",
+      "strings": [
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "E",
+        "B",
+        "D",
+        "G#",
+        "B",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "F7",
+      "root": "F",
+      "quality": "7",
+      "labelCifra": "F7",
+      "labelPt": "Fá 7",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "F",
+        "C",
+        "Eb",
+        "A",
+        "C",
+        "F"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "F#7",
+      "root": "F#",
+      "quality": "7",
+      "labelCifra": "F#7",
+      "labelPt": "Fá# 7",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 2,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "F#",
+        "C#",
+        "E",
+        "A#",
+        "C#",
+        "F#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "Gb7"
+      ]
+    },
+    {
+      "id": "G7",
+      "root": "G",
+      "quality": "7",
+      "labelCifra": "G7",
+      "labelPt": "Sol 7",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "G",
+        "B",
+        "D",
+        "G",
+        "B",
+        "F"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Ab7",
+      "root": "Ab",
+      "quality": "7",
+      "labelCifra": "Ab7",
+      "labelPt": "Láb 7",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 4,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 4,
+      "notes": [
+        "Ab",
+        "Eb",
+        "Gb",
+        "C",
+        "Eb",
+        "Ab"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "G#7"
+      ]
+    },
+    {
+      "id": "A7",
+      "root": "A",
+      "quality": "7",
+      "labelCifra": "A7",
+      "labelPt": "Lá 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "A",
+        "E",
+        "G",
+        "C#",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Bb7",
+      "root": "Bb",
+      "quality": "7",
+      "labelCifra": "Bb7",
+      "labelPt": "Sib 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "Bb",
+        "F",
+        "Ab",
+        "D",
+        "F"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "A#7"
+      ]
+    },
+    {
+      "id": "B7",
+      "root": "B",
+      "quality": "7",
+      "labelCifra": "B7",
+      "labelPt": "Si 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 4
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "B",
+        "D#",
+        "A",
+        "B",
+        "F#"
+      ],
+      "difficulty": 2,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Cm7",
+      "root": "C",
+      "quality": "m7",
+      "labelCifra": "Cm7",
+      "labelPt": "Dó menor 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 3,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 3,
+      "notes": [
+        "C",
+        "G",
+        "Bb",
+        "Eb",
+        "G"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "C#m7",
+      "root": "C#",
+      "quality": "m7",
+      "labelCifra": "C#m7",
+      "labelPt": "Dó# menor 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 4,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 4,
+      "notes": [
+        "C#",
+        "G#",
+        "B",
+        "E",
+        "G#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "Dbm7"
+      ]
+    },
+    {
+      "id": "Dm7",
+      "root": "D",
+      "quality": "m7",
+      "labelCifra": "Dm7",
+      "labelPt": "Ré menor 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "muted"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 2,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "D",
+        "A",
+        "C",
+        "F"
+      ],
+      "difficulty": 2,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Ebm7",
+      "root": "Eb",
+      "quality": "m7",
+      "labelCifra": "Ebm7",
+      "labelPt": "Mib menor 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 6,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 6,
+      "notes": [
+        "Eb",
+        "Bb",
+        "Db",
+        "Gb",
+        "Bb"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "D#m7"
+      ]
+    },
+    {
+      "id": "Em7",
+      "root": "E",
+      "quality": "m7",
+      "labelCifra": "Em7",
+      "labelPt": "Mi menor 7",
+      "strings": [
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "E",
+        "B",
+        "D",
+        "G",
+        "B",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Fm7",
+      "root": "F",
+      "quality": "m7",
+      "labelCifra": "Fm7",
+      "labelPt": "Fá menor 7",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "F",
+        "C",
+        "Eb",
+        "Ab",
+        "C",
+        "F"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "F#m7",
+      "root": "F#",
+      "quality": "m7",
+      "labelCifra": "F#m7",
+      "labelPt": "Fá# menor 7",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 2,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "F#",
+        "C#",
+        "E",
+        "A",
+        "C#",
+        "F#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "Gbm7"
+      ]
+    },
+    {
+      "id": "Gm7",
+      "root": "G",
+      "quality": "m7",
+      "labelCifra": "Gm7",
+      "labelPt": "Sol menor 7",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 3,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 3,
+      "notes": [
+        "G",
+        "D",
+        "F",
+        "Bb",
+        "D",
+        "G"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "G#m7",
+      "root": "G#",
+      "quality": "m7",
+      "labelCifra": "G#m7",
+      "labelPt": "Sol# menor 7",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 4,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 4,
+      "notes": [
+        "G#",
+        "D#",
+        "F#",
+        "B",
+        "D#",
+        "G#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "Abm7"
+      ]
+    },
+    {
+      "id": "Am7",
+      "root": "A",
+      "quality": "m7",
+      "labelCifra": "Am7",
+      "labelPt": "Lá menor 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "A",
+        "E",
+        "G",
+        "C",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Bbm7",
+      "root": "Bb",
+      "quality": "m7",
+      "labelCifra": "Bbm7",
+      "labelPt": "Sib menor 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "Bb",
+        "F",
+        "Ab",
+        "Db",
+        "F"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "A#m7"
+      ]
+    },
+    {
+      "id": "Bm7",
+      "root": "B",
+      "quality": "m7",
+      "labelCifra": "Bm7",
+      "labelPt": "Si menor 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 2,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "B",
+        "F#",
+        "A",
+        "D",
+        "F#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Cmaj7",
+      "root": "C",
+      "quality": "maj7",
+      "labelCifra": "C7M",
+      "labelPt": "Dó 7M",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "C",
+        "E",
+        "G",
+        "B",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Dbmaj7",
+      "root": "Db",
+      "quality": "maj7",
+      "labelCifra": "Db7M",
+      "labelPt": "Réb 7M",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 4,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 4,
+      "notes": [
+        "Db",
+        "Ab",
+        "C",
+        "F",
+        "Ab"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "C#7M"
+      ]
+    },
+    {
+      "id": "Dmaj7",
+      "root": "D",
+      "quality": "maj7",
+      "labelCifra": "D7M",
+      "labelPt": "Ré 7M",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "muted"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "D",
+        "A",
+        "C#",
+        "F#"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Ebmaj7",
+      "root": "Eb",
+      "quality": "maj7",
+      "labelCifra": "Eb7M",
+      "labelPt": "Mib 7M",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 6,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 6,
+      "notes": [
+        "Eb",
+        "Bb",
+        "D",
+        "G",
+        "Bb"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "D#7M"
+      ]
+    },
+    {
+      "id": "Emaj7",
+      "root": "E",
+      "quality": "maj7",
+      "labelCifra": "E7M",
+      "labelPt": "Mi 7M",
+      "strings": [
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 2
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "E",
+        "B",
+        "D#",
+        "G#",
+        "B",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Fmaj7",
+      "root": "F",
+      "quality": "maj7",
+      "labelCifra": "F7M",
+      "labelPt": "Fá 7M",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "F",
+        "A",
+        "C",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "F#maj7",
+      "root": "F#",
+      "quality": "maj7",
+      "labelCifra": "F#7M",
+      "labelPt": "Fá# 7M",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "muted"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "F#",
+        "E#",
+        "A#",
+        "C#"
+      ],
+      "difficulty": 2,
+      "catalogPhase": 3,
+      "aliases": [
+        "Gb7M"
+      ]
+    },
+    {
+      "id": "Gmaj7",
+      "root": "G",
+      "quality": "maj7",
+      "labelCifra": "G7M",
+      "labelPt": "Sol 7M",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "G",
+        "B",
+        "D",
+        "G",
+        "B",
+        "F#"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Abmaj7",
+      "root": "Ab",
+      "quality": "maj7",
+      "labelCifra": "Ab7M",
+      "labelPt": "Láb 7M",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 1
+        },
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 2
+        },
+        {
+          "type": "muted"
+        }
+      ],
+      "baseFret": 4,
+      "notes": [
+        "Ab",
+        "G",
+        "C",
+        "Eb"
+      ],
+      "difficulty": 2,
+      "catalogPhase": 3,
+      "aliases": [
+        "G#7M"
+      ]
+    },
+    {
+      "id": "Amaj7",
+      "root": "A",
+      "quality": "maj7",
+      "labelCifra": "A7M",
+      "labelPt": "Lá 7M",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        },
+        {
+          "type": "open"
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "A",
+        "E",
+        "G#",
+        "C#",
+        "E"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "Bbmaj7",
+      "root": "Bb",
+      "quality": "maj7",
+      "labelCifra": "Bb7M",
+      "labelPt": "Sib 7M",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "Bb",
+        "F",
+        "A",
+        "D",
+        "F"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": [
+        "A#7M"
+      ]
+    },
+    {
+      "id": "Bmaj7",
+      "root": "B",
+      "quality": "maj7",
+      "labelCifra": "B7M",
+      "labelPt": "Si 7M",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 2,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "B",
+        "F#",
+        "A#",
+        "D#",
+        "F#"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 3,
+      "aliases": []
+    },
+    {
+      "id": "F-simples",
+      "root": "F",
+      "quality": "maj",
+      "labelCifra": "F",
+      "labelPt": "Fá",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 1,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 1,
+        "fromString": 2,
+        "toString": 1
+      },
+      "baseFret": 1,
+      "notes": [
+        "F",
+        "A",
+        "C",
+        "F"
+      ],
+      "difficulty": 2,
+      "catalogPhase": 4,
+      "variantOf": "F",
+      "variantName": "Simplificado (sem pestana inteira)",
+      "aliases": []
+    },
+    {
+      "id": "G-4dedos",
+      "root": "G",
+      "quality": "maj",
+      "labelCifra": "G",
+      "labelPt": "Sol",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 4
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "G",
+        "B",
+        "D",
+        "G",
+        "D",
+        "G"
+      ],
+      "difficulty": 2,
+      "catalogPhase": 4,
+      "variantOf": "G",
+      "variantName": "Com 4 dedos",
+      "aliases": []
+    },
+    {
+      "id": "C-pestana3",
+      "root": "C",
+      "quality": "maj",
+      "labelCifra": "C",
+      "labelPt": "Dó",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 3,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 3,
+      "notes": [
+        "C",
+        "G",
+        "C",
+        "E",
+        "G"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 4,
+      "variantOf": "C",
+      "variantName": "Pestana na 3ª casa",
+      "aliases": []
+    },
+    {
+      "id": "D-pestana5",
+      "root": "D",
+      "quality": "maj",
+      "labelCifra": "D",
+      "labelPt": "Ré",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 5,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 5,
+      "notes": [
+        "D",
+        "A",
+        "D",
+        "F#",
+        "A"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 4,
+      "variantOf": "D",
+      "variantName": "Pestana na 5ª casa",
+      "aliases": []
+    },
+    {
+      "id": "E-pestana7",
+      "root": "E",
+      "quality": "maj",
+      "labelCifra": "E",
+      "labelPt": "Mi",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 9,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 9,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 9,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 7,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 7,
+      "notes": [
+        "E",
+        "B",
+        "E",
+        "G#",
+        "B"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 4,
+      "variantOf": "E",
+      "variantName": "Pestana na 7ª casa",
+      "aliases": []
+    },
+    {
+      "id": "G-pestana3",
+      "root": "G",
+      "quality": "maj",
+      "labelCifra": "G",
+      "labelPt": "Sol",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 4,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 3,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 3,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 3,
+      "notes": [
+        "G",
+        "D",
+        "G",
+        "B",
+        "D",
+        "G"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 4,
+      "variantOf": "G",
+      "variantName": "Pestana na 3ª casa",
+      "aliases": []
+    },
+    {
+      "id": "A-pestana5",
+      "root": "A",
+      "quality": "maj",
+      "labelCifra": "A",
+      "labelPt": "Lá",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 5,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 5,
+      "notes": [
+        "A",
+        "E",
+        "A",
+        "C#",
+        "E",
+        "A"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 4,
+      "variantOf": "A",
+      "variantName": "Pestana na 5ª casa",
+      "aliases": []
+    },
+    {
+      "id": "Am-pestana5",
+      "root": "A",
+      "quality": "min",
+      "labelCifra": "Am",
+      "labelPt": "Lá menor",
+      "strings": [
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 5,
+        "fromString": 6,
+        "toString": 1
+      },
+      "baseFret": 5,
+      "notes": [
+        "A",
+        "E",
+        "A",
+        "C",
+        "E",
+        "A"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 4,
+      "variantOf": "Am",
+      "variantName": "Pestana na 5ª casa",
+      "aliases": []
+    },
+    {
+      "id": "Dm-pestana5",
+      "root": "D",
+      "quality": "min",
+      "labelCifra": "Dm",
+      "labelPt": "Ré menor",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 6,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 5,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 5,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 5,
+      "notes": [
+        "D",
+        "A",
+        "D",
+        "F",
+        "A"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 4,
+      "variantOf": "Dm",
+      "variantName": "Pestana na 5ª casa",
+      "aliases": []
+    },
+    {
+      "id": "Em-pestana7",
+      "root": "E",
+      "quality": "min",
+      "labelCifra": "Em",
+      "labelPt": "Mi menor",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 1
+        },
+        {
+          "type": "fretted",
+          "fret": 9,
+          "finger": 3
+        },
+        {
+          "type": "fretted",
+          "fret": 9,
+          "finger": 4
+        },
+        {
+          "type": "fretted",
+          "fret": 8,
+          "finger": 2
+        },
+        {
+          "type": "fretted",
+          "fret": 7,
+          "finger": 1
+        }
+      ],
+      "barre": {
+        "fret": 7,
+        "fromString": 5,
+        "toString": 1
+      },
+      "baseFret": 7,
+      "notes": [
+        "E",
+        "B",
+        "E",
+        "G",
+        "B"
+      ],
+      "difficulty": 3,
+      "catalogPhase": 4,
+      "variantOf": "Em",
+      "variantName": "Pestana na 7ª casa",
+      "aliases": []
+    },
+    {
+      "id": "Bm7-aberto",
+      "root": "B",
+      "quality": "m7",
+      "labelCifra": "Bm7",
+      "labelPt": "Si menor 7",
+      "strings": [
+        {
+          "type": "muted"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 1
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 2
+        },
+        {
+          "type": "open"
+        },
+        {
+          "type": "fretted",
+          "fret": 2,
+          "finger": 3
+        }
+      ],
+      "baseFret": 1,
+      "notes": [
+        "B",
+        "D",
+        "A",
+        "B",
+        "F#"
+      ],
+      "difficulty": 1,
+      "catalogPhase": 4,
+      "variantOf": "Bm7",
+      "variantName": "Aberto, sem pestana",
+      "aliases": []
+    }
+  ]
+}
