@@ -43,6 +43,7 @@ O app abre em `http://localhost:4200/`.
 
 ## Documentação
 
+- [Regras de negócio](docs/business-rules.md)
 - [Wireframes das telas](docs/wireframes.md)
 - [Catálogo de acordes](docs/chord-catalog.md) · dados em [`data/chords.json`](data/chords.json)
 - [Protótipo do metrônomo](prototype/README.md)

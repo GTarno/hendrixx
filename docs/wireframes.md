@@ -103,7 +103,7 @@ com o botão Iniciar, fixos na tela enquanto a grade rola.
 | Faixa do ciclo          | Mostra a ordem real. Arrastar reordena; toque abre "Remover / Mover". Com ping-pong, mostra a volta em cinza: `C → D → E → F → E → D`.                   |
 | Chip de acorde          | Mini-diagrama (48 px) + nome no modo de nomenclatura atual. Toque alterna seleção. Pressionar e segurar abre o diagrama grande e as variações.           |
 | BPM                     | Slider + `−5`/`+5` + campo numérico + Tap tempo (média dos últimos 4 toques, arredondada). Fora de 30–240, o valor é limitado e aparece uma dica abaixo. |
-| Tempos por acorde       | Opções 1, 2, 4, 8, 16. Ver "Decisão em aberto" no fim.                                                                                                   |
+| Tempos por acorde       | Opções 1, 2, 4, 8, 16. Ver "Tempos por acorde x troca no tempo 1" no fim.                                                                                |
 | Parar                   | Campo numérico só fica ativo na opção selecionada. Ciclos: 1–99. Minutos: 1–60.                                                                          |
 | Resumo                  | Fórmula: `duração do ciclo = acordes no ciclo × tempos × 60 / bpm`. Ping-pong conta a volta. Mostra também a duração total quando a parada é por ciclos. |
 
@@ -303,15 +303,7 @@ biblioteca) e grande (acorde atual).
 
 ---
 
-## Decisão em aberto: tempos por acorde x troca no tempo 1
+## Tempos por acorde x troca no tempo 1
 
-RN5 diz que a troca sempre cai no tempo 1, mas o preset "Troca rápida" usa 1 tempo por acorde.
-Proposta para o MVP:
-
-- **N ≥ 4**: N precisa ser múltiplo de 4 (4, 8, 12, 16). A troca sempre cai no tempo 1.
-- **N < 4**: só 1 ou 2, que dividem o compasso. A troca cai nos tempos 1 e 3 (N = 2) ou em
-  todos os tempos (N = 1). O acento continua só no tempo 1.
-- Valores como 3, 5 ou 6 ficam de fora do MVP. Se forem pedidos, a opção é trocar o compasso
-  da sessão para N/4 (ex.: 3 tempos = compasso 3/4).
-
-Essa proposta é a que o protótipo implementa (opções 1, 2, 4, 8 e 16).
+A regra está registrada como decisão D1 em [`business-rules.md`](business-rules.md#decisões):
+a tela oferece 1, 2, 4, 8 e 16 tempos; com 4 ou mais, a troca sempre cai no tempo 1.
