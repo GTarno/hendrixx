@@ -23,7 +23,7 @@ const PT_LETTER = { C: 'Dó', D: 'Ré', E: 'Mi', F: 'Fá', G: 'Sol', A: 'Lá', B
 const QUALITIES = {
   maj: { intervals: [0, 4, 7], suffixCifra: '', suffixId: '', suffixPt: '' },
   min: { intervals: [0, 3, 7], suffixCifra: 'm', suffixId: 'm', suffixPt: ' menor' },
-  '7': { intervals: [0, 4, 7, 10], suffixCifra: '7', suffixId: '7', suffixPt: ' 7' },
+  7: { intervals: [0, 4, 7, 10], suffixCifra: '7', suffixId: '7', suffixPt: ' 7' },
   m7: { intervals: [0, 3, 7, 10], suffixCifra: 'm7', suffixId: 'm7', suffixPt: ' menor 7' },
   maj7: { intervals: [0, 4, 7, 11], suffixCifra: '7M', suffixId: 'maj7', suffixPt: ' 7M' },
 };
@@ -52,15 +52,40 @@ const shape = (frets, fingers, barre) => ({ frets, fingers, barre });
 const n_ = null;
 
 const SHAPES = {
-  E: (n) => shape([n, n + 2, n + 2, n + 1, n, n], [1, 3, 4, 2, 1, 1], { fret: n, fromString: 6, toString: 1 }),
-  A: (n) => shape([X, n, n + 2, n + 2, n + 2, n], [n_, 1, 2, 3, 4, 1], { fret: n, fromString: 5, toString: 1 }),
-  Em: (n) => shape([n, n + 2, n + 2, n, n, n], [1, 3, 4, 1, 1, 1], { fret: n, fromString: 6, toString: 1 }),
-  Am: (n) => shape([X, n, n + 2, n + 2, n + 1, n], [n_, 1, 3, 4, 2, 1], { fret: n, fromString: 5, toString: 1 }),
-  E7: (n) => shape([n, n + 2, n, n + 1, n, n], [1, 3, 1, 2, 1, 1], { fret: n, fromString: 6, toString: 1 }),
-  A7: (n) => shape([X, n, n + 2, n, n + 2, n], [n_, 1, 3, 1, 4, 1], { fret: n, fromString: 5, toString: 1 }),
-  Em7: (n) => shape([n, n + 2, n, n, n, n], [1, 3, 1, 1, 1, 1], { fret: n, fromString: 6, toString: 1 }),
-  Am7: (n) => shape([X, n, n + 2, n, n + 1, n], [n_, 1, 3, 1, 2, 1], { fret: n, fromString: 5, toString: 1 }),
-  Amaj7: (n) => shape([X, n, n + 2, n + 1, n + 2, n], [n_, 1, 3, 2, 4, 1], { fret: n, fromString: 5, toString: 1 }),
+  E: (n) =>
+    shape([n, n + 2, n + 2, n + 1, n, n], [1, 3, 4, 2, 1, 1], {
+      fret: n,
+      fromString: 6,
+      toString: 1,
+    }),
+  A: (n) =>
+    shape([X, n, n + 2, n + 2, n + 2, n], [n_, 1, 2, 3, 4, 1], {
+      fret: n,
+      fromString: 5,
+      toString: 1,
+    }),
+  Em: (n) =>
+    shape([n, n + 2, n + 2, n, n, n], [1, 3, 4, 1, 1, 1], { fret: n, fromString: 6, toString: 1 }),
+  Am: (n) =>
+    shape([X, n, n + 2, n + 2, n + 1, n], [n_, 1, 3, 4, 2, 1], {
+      fret: n,
+      fromString: 5,
+      toString: 1,
+    }),
+  E7: (n) =>
+    shape([n, n + 2, n, n + 1, n, n], [1, 3, 1, 2, 1, 1], { fret: n, fromString: 6, toString: 1 }),
+  A7: (n) =>
+    shape([X, n, n + 2, n, n + 2, n], [n_, 1, 3, 1, 4, 1], { fret: n, fromString: 5, toString: 1 }),
+  Em7: (n) =>
+    shape([n, n + 2, n, n, n, n], [1, 3, 1, 1, 1, 1], { fret: n, fromString: 6, toString: 1 }),
+  Am7: (n) =>
+    shape([X, n, n + 2, n, n + 1, n], [n_, 1, 3, 1, 2, 1], { fret: n, fromString: 5, toString: 1 }),
+  Amaj7: (n) =>
+    shape([X, n, n + 2, n + 1, n + 2, n], [n_, 1, 3, 2, 4, 1], {
+      fret: n,
+      fromString: 5,
+      toString: 1,
+    }),
   Emaj7: (n) => shape([n, X, n + 1, n + 1, n, X], [1, n_, 3, 4, 2, n_]),
 };
 
@@ -95,36 +120,82 @@ const OPEN = {
 const PHASE1 = new Set(['C', 'D', 'E', 'F', 'G', 'A', 'B', 'Am', 'Dm', 'Em']);
 const MAIN = [
   // maiores
-  ['C', 'maj', OPEN.C], ['Db', 'maj', SHAPES.A(4), ['C#']], ['D', 'maj', OPEN.D],
-  ['Eb', 'maj', SHAPES.A(6), ['D#']], ['E', 'maj', OPEN.E], ['F', 'maj', SHAPES.E(1)],
-  ['F#', 'maj', SHAPES.E(2), ['Gb']], ['G', 'maj', OPEN.G], ['Ab', 'maj', SHAPES.E(4), ['G#']],
-  ['A', 'maj', OPEN.A], ['Bb', 'maj', SHAPES.A(1), ['A#']], ['B', 'maj', SHAPES.A(2)],
+  ['C', 'maj', OPEN.C],
+  ['Db', 'maj', SHAPES.A(4), ['C#']],
+  ['D', 'maj', OPEN.D],
+  ['Eb', 'maj', SHAPES.A(6), ['D#']],
+  ['E', 'maj', OPEN.E],
+  ['F', 'maj', SHAPES.E(1)],
+  ['F#', 'maj', SHAPES.E(2), ['Gb']],
+  ['G', 'maj', OPEN.G],
+  ['Ab', 'maj', SHAPES.E(4), ['G#']],
+  ['A', 'maj', OPEN.A],
+  ['Bb', 'maj', SHAPES.A(1), ['A#']],
+  ['B', 'maj', SHAPES.A(2)],
   // menores
-  ['C', 'min', SHAPES.Am(3)], ['C#', 'min', SHAPES.Am(4), ['Db']], ['D', 'min', OPEN.Dm],
-  ['Eb', 'min', SHAPES.Am(6), ['D#']], ['E', 'min', OPEN.Em], ['F', 'min', SHAPES.Em(1)],
-  ['F#', 'min', SHAPES.Em(2), ['Gb']], ['G', 'min', SHAPES.Em(3)], ['G#', 'min', SHAPES.Em(4), ['Ab']],
-  ['A', 'min', OPEN.Am], ['Bb', 'min', SHAPES.Am(1), ['A#']], ['B', 'min', SHAPES.Am(2)],
+  ['C', 'min', SHAPES.Am(3)],
+  ['C#', 'min', SHAPES.Am(4), ['Db']],
+  ['D', 'min', OPEN.Dm],
+  ['Eb', 'min', SHAPES.Am(6), ['D#']],
+  ['E', 'min', OPEN.Em],
+  ['F', 'min', SHAPES.Em(1)],
+  ['F#', 'min', SHAPES.Em(2), ['Gb']],
+  ['G', 'min', SHAPES.Em(3)],
+  ['G#', 'min', SHAPES.Em(4), ['Ab']],
+  ['A', 'min', OPEN.Am],
+  ['Bb', 'min', SHAPES.Am(1), ['A#']],
+  ['B', 'min', SHAPES.Am(2)],
   // sétima
-  ['C', '7', OPEN.C7], ['Db', '7', SHAPES.A7(4), ['C#']], ['D', '7', OPEN.D7],
-  ['Eb', '7', SHAPES.A7(6), ['D#']], ['E', '7', OPEN.E7], ['F', '7', SHAPES.E7(1)],
-  ['F#', '7', SHAPES.E7(2), ['Gb']], ['G', '7', OPEN.G7], ['Ab', '7', SHAPES.E7(4), ['G#']],
-  ['A', '7', OPEN.A7], ['Bb', '7', SHAPES.A7(1), ['A#']], ['B', '7', OPEN.B7],
+  ['C', '7', OPEN.C7],
+  ['Db', '7', SHAPES.A7(4), ['C#']],
+  ['D', '7', OPEN.D7],
+  ['Eb', '7', SHAPES.A7(6), ['D#']],
+  ['E', '7', OPEN.E7],
+  ['F', '7', SHAPES.E7(1)],
+  ['F#', '7', SHAPES.E7(2), ['Gb']],
+  ['G', '7', OPEN.G7],
+  ['Ab', '7', SHAPES.E7(4), ['G#']],
+  ['A', '7', OPEN.A7],
+  ['Bb', '7', SHAPES.A7(1), ['A#']],
+  ['B', '7', OPEN.B7],
   // menor com sétima
-  ['C', 'm7', SHAPES.Am7(3)], ['C#', 'm7', SHAPES.Am7(4), ['Db']], ['D', 'm7', OPEN.Dm7],
-  ['Eb', 'm7', SHAPES.Am7(6), ['D#']], ['E', 'm7', OPEN.Em7], ['F', 'm7', SHAPES.Em7(1)],
-  ['F#', 'm7', SHAPES.Em7(2), ['Gb']], ['G', 'm7', SHAPES.Em7(3)], ['G#', 'm7', SHAPES.Em7(4), ['Ab']],
-  ['A', 'm7', OPEN.Am7], ['Bb', 'm7', SHAPES.Am7(1), ['A#']], ['B', 'm7', SHAPES.Am7(2)],
+  ['C', 'm7', SHAPES.Am7(3)],
+  ['C#', 'm7', SHAPES.Am7(4), ['Db']],
+  ['D', 'm7', OPEN.Dm7],
+  ['Eb', 'm7', SHAPES.Am7(6), ['D#']],
+  ['E', 'm7', OPEN.Em7],
+  ['F', 'm7', SHAPES.Em7(1)],
+  ['F#', 'm7', SHAPES.Em7(2), ['Gb']],
+  ['G', 'm7', SHAPES.Em7(3)],
+  ['G#', 'm7', SHAPES.Em7(4), ['Ab']],
+  ['A', 'm7', OPEN.Am7],
+  ['Bb', 'm7', SHAPES.Am7(1), ['A#']],
+  ['B', 'm7', SHAPES.Am7(2)],
   // sétima maior
-  ['C', 'maj7', OPEN.Cmaj7], ['Db', 'maj7', SHAPES.Amaj7(4), ['C#']], ['D', 'maj7', OPEN.Dmaj7],
-  ['Eb', 'maj7', SHAPES.Amaj7(6), ['D#']], ['E', 'maj7', OPEN.Emaj7], ['F', 'maj7', OPEN.Fmaj7],
-  ['F#', 'maj7', SHAPES.Emaj7(2), ['Gb']], ['G', 'maj7', OPEN.Gmaj7], ['Ab', 'maj7', SHAPES.Emaj7(4), ['G#']],
-  ['A', 'maj7', OPEN.Amaj7], ['Bb', 'maj7', SHAPES.Amaj7(1), ['A#']], ['B', 'maj7', SHAPES.Amaj7(2)],
+  ['C', 'maj7', OPEN.Cmaj7],
+  ['Db', 'maj7', SHAPES.Amaj7(4), ['C#']],
+  ['D', 'maj7', OPEN.Dmaj7],
+  ['Eb', 'maj7', SHAPES.Amaj7(6), ['D#']],
+  ['E', 'maj7', OPEN.Emaj7],
+  ['F', 'maj7', OPEN.Fmaj7],
+  ['F#', 'maj7', SHAPES.Emaj7(2), ['Gb']],
+  ['G', 'maj7', OPEN.Gmaj7],
+  ['Ab', 'maj7', SHAPES.Emaj7(4), ['G#']],
+  ['A', 'maj7', OPEN.Amaj7],
+  ['Bb', 'maj7', SHAPES.Amaj7(1), ['A#']],
+  ['B', 'maj7', SHAPES.Amaj7(2)],
 ];
 
 // Fase 4: variações (outra digitação ou posição do mesmo acorde).
 // [id da variação, raiz, qualidade, forma, nome da variação]
 const VARIANTS = [
-  ['F-simples', 'F', 'maj', shape([X, X, 3, 2, 1, 1], [n_, n_, 3, 2, 1, 1], { fret: 1, fromString: 2, toString: 1 }), 'Simplificado (sem pestana inteira)'],
+  [
+    'F-simples',
+    'F',
+    'maj',
+    shape([X, X, 3, 2, 1, 1], [n_, n_, 3, 2, 1, 1], { fret: 1, fromString: 2, toString: 1 }),
+    'Simplificado (sem pestana inteira)',
+  ],
   ['G-4dedos', 'G', 'maj', shape([3, 2, 0, 0, 3, 3], [2, 1, n_, n_, 3, 4]), 'Com 4 dedos'],
   ['C-pestana3', 'C', 'maj', SHAPES.A(3), 'Pestana na 3ª casa'],
   ['D-pestana5', 'D', 'maj', SHAPES.A(5), 'Pestana na 5ª casa'],
@@ -134,7 +205,13 @@ const VARIANTS = [
   ['Am-pestana5', 'A', 'min', SHAPES.Em(5), 'Pestana na 5ª casa'],
   ['Dm-pestana5', 'D', 'min', SHAPES.Am(5), 'Pestana na 5ª casa'],
   ['Em-pestana7', 'E', 'min', SHAPES.Am(7), 'Pestana na 7ª casa'],
-  ['Bm7-aberto', 'B', 'm7', shape([X, 2, 0, 2, 0, 2], [n_, 1, n_, 2, n_, 3]), 'Aberto, sem pestana'],
+  [
+    'Bm7-aberto',
+    'B',
+    'm7',
+    shape([X, 2, 0, 2, 0, 2], [n_, 1, n_, 2, n_, 3]),
+    'Aberto, sem pestana',
+  ],
 ];
 
 // ---------- montagem ----------
@@ -184,10 +261,14 @@ function validate(chord, sh) {
   const q = QUALITIES[chord.quality];
   const rootPc = pcOf(chord.root);
   const tones = new Set(q.intervals.map((i) => (rootPc + i) % 12));
-  const sounding = sh.frets.map((f, i) => (f === X ? null : (TUNING_PC[i] + f) % 12)).filter((p) => p !== null);
-  if (sh.frets.length !== 6 || sh.fingers.length !== 6) throw new Error(`${where} precisa de 6 cordas`);
+  const sounding = sh.frets
+    .map((f, i) => (f === X ? null : (TUNING_PC[i] + f) % 12))
+    .filter((p) => p !== null);
+  if (sh.frets.length !== 6 || sh.fingers.length !== 6)
+    throw new Error(`${where} precisa de 6 cordas`);
   if (sounding.length < 4) throw new Error(`${where} menos de 4 cordas soando`);
-  for (const pc of sounding) if (!tones.has(pc)) throw new Error(`${where} nota fora do acorde: ${pc}`);
+  for (const pc of sounding)
+    if (!tones.has(pc)) throw new Error(`${where} nota fora do acorde: ${pc}`);
   for (const i of q.intervals) {
     if (i === 7) continue; // a quinta pode ser omitida
     if (!sounding.includes((rootPc + i) % 12)) throw new Error(`${where} falta o intervalo ${i}`);
@@ -195,16 +276,20 @@ function validate(chord, sh) {
   if (sounding[0] !== rootPc) throw new Error(`${where} o baixo não é a tônica`);
   sh.frets.forEach((f, i) => {
     const hasFinger = sh.fingers[i] !== null;
-    if (typeof f === 'number' && f > 0 && !hasFinger) throw new Error(`${where} corda ${6 - i} sem dedo`);
-    if ((f === X || f === 0) && hasFinger) throw new Error(`${where} corda ${6 - i} solta/abafada com dedo`);
+    if (typeof f === 'number' && f > 0 && !hasFinger)
+      throw new Error(`${where} corda ${6 - i} sem dedo`);
+    if ((f === X || f === 0) && hasFinger)
+      throw new Error(`${where} corda ${6 - i} solta/abafada com dedo`);
   });
   const frets = sh.frets.filter((f) => typeof f === 'number' && f > 0);
-  if (frets.length && Math.max(...frets) - Math.min(...frets) > 4) throw new Error(`${where} abertura maior que 5 casas`);
+  if (frets.length && Math.max(...frets) - Math.min(...frets) > 4)
+    throw new Error(`${where} abertura maior que 5 casas`);
   if (sh.barre) {
     const { fret, fromString, toString } = sh.barre;
     for (let s = fromString; s >= toString; s--) {
       const f = sh.frets[6 - s];
-      if (f === X || f === 0 || f < fret) throw new Error(`${where} pestana não cobre a corda ${s}`);
+      if (f === X || f === 0 || f < fret)
+        throw new Error(`${where} pestana não cobre a corda ${s}`);
     }
   }
   if (chord.notes.length !== sounding.length) throw new Error(`${where} notas inconsistentes`);
@@ -219,17 +304,30 @@ for (const [root, quality, sh, aliases = []] of MAIN) {
   if (seen.has(id)) throw new Error(`id repetido: ${id}`);
   seen.add(id);
   const phase = PHASE1.has(id) ? 1 : quality === 'maj' || quality === 'min' ? 2 : 3;
-  chords.push(buildChord(id, root, quality, sh, { catalogPhase: phase, aliases: aliases.map((a) => a + q.suffixCifra) }));
+  chords.push(
+    buildChord(id, root, quality, sh, {
+      catalogPhase: phase,
+      aliases: aliases.map((a) => a + q.suffixCifra),
+    }),
+  );
 }
 for (const [id, root, quality, sh, variantName] of VARIANTS) {
   const parent = root + QUALITIES[quality].suffixId;
   if (!seen.has(parent)) throw new Error(`variação ${id} sem acorde principal ${parent}`);
   if (seen.has(id)) throw new Error(`id repetido: ${id}`);
   seen.add(id);
-  chords.push(buildChord(id, root, quality, sh, { catalogPhase: 4, variantOf: parent, variantName, aliases: [] }));
+  chords.push(
+    buildChord(id, root, quality, sh, {
+      catalogPhase: 4,
+      variantOf: parent,
+      variantName,
+      aliases: [],
+    }),
+  );
 }
 
-const json = JSON.stringify({ version: 1, tuning: ['E', 'A', 'D', 'G', 'B', 'E'], chords }, null, 2) + '\n';
+const json =
+  JSON.stringify({ version: 1, tuning: ['E', 'A', 'D', 'G', 'B', 'E'], chords }, null, 2) + '\n';
 if (process.argv.includes('--check')) {
   const current = readFileSync(OUT, 'utf8');
   if (current !== json) {

@@ -97,23 +97,23 @@ com o botão Iniciar, fixos na tela enquanto a grade rola.
 
 ### Componentes
 
-| Componente | Comportamento |
-|---|---|
-| Card de treino sugerido | Toque preenche acordes, BPM, tempos, ordem e parada. Não inicia sozinho. |
-| Faixa do ciclo | Mostra a ordem real. Arrastar reordena; toque abre "Remover / Mover". Com ping-pong, mostra a volta em cinza: `C → D → E → F → E → D`. |
-| Chip de acorde | Mini-diagrama (48 px) + nome no modo de nomenclatura atual. Toque alterna seleção. Pressionar e segurar abre o diagrama grande e as variações. |
-| BPM | Slider + `−5`/`+5` + campo numérico + Tap tempo (média dos últimos 4 toques, arredondada). Fora de 30–240, o valor é limitado e aparece uma dica abaixo. |
-| Tempos por acorde | Opções 1, 2, 4, 8, 16. Ver "Decisão em aberto" no fim. |
-| Parar | Campo numérico só fica ativo na opção selecionada. Ciclos: 1–99. Minutos: 1–60. |
-| Resumo | Fórmula: `duração do ciclo = acordes no ciclo × tempos × 60 / bpm`. Ping-pong conta a volta. Mostra também a duração total quando a parada é por ciclos. |
+| Componente              | Comportamento                                                                                                                                            |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Card de treino sugerido | Toque preenche acordes, BPM, tempos, ordem e parada. Não inicia sozinho.                                                                                 |
+| Faixa do ciclo          | Mostra a ordem real. Arrastar reordena; toque abre "Remover / Mover". Com ping-pong, mostra a volta em cinza: `C → D → E → F → E → D`.                   |
+| Chip de acorde          | Mini-diagrama (48 px) + nome no modo de nomenclatura atual. Toque alterna seleção. Pressionar e segurar abre o diagrama grande e as variações.           |
+| BPM                     | Slider + `−5`/`+5` + campo numérico + Tap tempo (média dos últimos 4 toques, arredondada). Fora de 30–240, o valor é limitado e aparece uma dica abaixo. |
+| Tempos por acorde       | Opções 1, 2, 4, 8, 16. Ver "Decisão em aberto" no fim.                                                                                                   |
+| Parar                   | Campo numérico só fica ativo na opção selecionada. Ciclos: 1–99. Minutos: 1–60.                                                                          |
+| Resumo                  | Fórmula: `duração do ciclo = acordes no ciclo × tempos × 60 / bpm`. Ping-pong conta a volta. Mostra também a duração total quando a parada é por ciclos. |
 
 ### Estados e validação
 
-| Situação | O que a tela mostra |
-|---|---|
-| Menos de 2 acordes (RN7) | Botão Iniciar desabilitado + texto "Escolha pelo menos 2 acordes" acima dele. |
-| Ordem aleatória com 2 acordes | Aviso discreto: "Com 2 acordes, aleatório vira alternância." |
-| BPM digitado fora da faixa | Valor ajustado para 30 ou 240 e dica "Entre 30 e 240 bpm". |
+| Situação                                  | O que a tela mostra                                                                     |
+| ----------------------------------------- | --------------------------------------------------------------------------------------- |
+| Menos de 2 acordes (RN7)                  | Botão Iniciar desabilitado + texto "Escolha pelo menos 2 acordes" acima dele.           |
+| Ordem aleatória com 2 acordes             | Aviso discreto: "Com 2 acordes, aleatório vira alternância."                            |
+| BPM digitado fora da faixa                | Valor ajustado para 30 ou 240 e dica "Entre 30 e 240 bpm".                              |
 | Mesmo acorde duas vezes seguidas na faixa | Permitido? Não: o chip é um seletor, cada acorde entra uma vez. Repetição vem da ordem. |
 
 ---
@@ -188,23 +188,23 @@ Com `prefers-reduced-motion`, o pulso e a barra viram mudanças de estado sem an
 
 ### Estados da sessão
 
-| Estado | Tela |
-|---|---|
-| **Contagem** (RN6) | Nome do acorde substituído por `1 · 2 · 3 · 4` grande, um número por clique. O primeiro acorde já aparece como "Próximo". |
-| **Rodando** | Layout acima. |
-| **Pausado** | Tudo congela, faixa "Pausado" sobre o acorde, botão vira `▶ Continuar`. Ao continuar, a música recomeça no tempo 1 do acorde atual. |
-| **Fim** (RN4) | Vai para a tela 2b. |
-| **Aba em segundo plano** | O áudio continua (scheduler em Web Worker). Ao voltar, a tela se ressincroniza pelo relógio de áudio. |
+| Estado                   | Tela                                                                                                                                |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Contagem** (RN6)       | Nome do acorde substituído por `1 · 2 · 3 · 4` grande, um número por clique. O primeiro acorde já aparece como "Próximo".           |
+| **Rodando**              | Layout acima.                                                                                                                       |
+| **Pausado**              | Tudo congela, faixa "Pausado" sobre o acorde, botão vira `▶ Continuar`. Ao continuar, a música recomeça no tempo 1 do acorde atual. |
+| **Fim** (RN4)            | Vai para a tela 2b.                                                                                                                 |
+| **Aba em segundo plano** | O áudio continua (scheduler em Web Worker). Ao voltar, a tela se ressincroniza pelo relógio de áudio.                               |
 
 ### Atalhos de teclado (fase 4)
 
-| Tecla | Ação |
-|---|---|
-| Espaço | Pausar / continuar |
-| Esc | Parar |
-| ↑ / ↓ | +5 / −5 bpm |
-| F | Tela cheia |
-| N | Alternar cifra / português |
+| Tecla  | Ação                       |
+| ------ | -------------------------- |
+| Espaço | Pausar / continuar         |
+| Esc    | Parar                      |
+| ↑ / ↓  | +5 / −5 bpm                |
+| F      | Tela cheia                 |
+| N      | Alternar cifra / português |
 
 ### Acessibilidade
 
