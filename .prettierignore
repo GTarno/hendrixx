@@ -1,0 +1,9 @@
+dist
+coverage
+.angular
+node_modules
+package-lock.json
+# Gerado por tools/build-chord-catalog.mjs
+data/chords.json
+# Protótipo HTML único, fora do app
+prototype/metronome.html
