@@ -1,5 +1,7 @@
 # hendrixx
 
+[![CI](https://github.com/GTarno/hendrixx/actions/workflows/ci.yml/badge.svg)](https://github.com/GTarno/hendrixx/actions/workflows/ci.yml)
+
 🎸 Hendrixx: practice guitar chord changes with a customizable metronome, BPM control and visual chord diagrams.
 
 App Angular (componentes standalone + Signals) para treinar troca de acordes de violão com
@@ -7,7 +9,7 @@ metrônomo configurável.
 
 ## Como rodar
 
-Requer Node.js 22 ou mais recente.
+Requer Node.js 22.22+ ou 24.15+ (a versão usada no CI está em `.nvmrc`).
 
 ```bash
 npm install
