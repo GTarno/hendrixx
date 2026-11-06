@@ -15,7 +15,9 @@ ou transcrito do PDF do curso; ele serve só como referência de estudo e de lay
 
 ## Modelo
 
-Segue o `Chord` do plano, com quatro campos a mais (marcados com ➕):
+Segue o `Chord` do plano, com quatro campos a mais (marcados com ➕). O modelo em TypeScript,
+com a validação `isChord`, está em [`src/app/core/models/chord.model.ts`](../src/app/core/models/chord.model.ts);
+um teste confere todos os acordes de `data/chords.json` contra ele.
 
 ```ts
 type ChordQuality = 'maj' | 'min' | '7' | 'm7' | 'maj7';
