@@ -12,7 +12,8 @@
     "format:check": "prettier --check .",
     "test:watch": "ng test",
     "catalog:build": "node tools/build-chord-catalog.mjs",
-    "catalog:check": "node tools/build-chord-catalog.mjs --check"
+    "catalog:check": "node tools/build-chord-catalog.mjs --check",
+    "build:pages": "ng build --base-href /hendrixx/ && node tools/pages-fallback.mjs"
   },
   "private": true,
   "packageManager": "npm@10.9.9",
