@@ -7,6 +7,8 @@
 App Angular (componentes standalone + Signals) para treinar troca de acordes de violão com
 metrônomo configurável.
 
+**App publicado:** https://gtarno.github.io/hendrixx/
+
 ## Como rodar
 
 Requer Node.js 22.22+ ou 24.15+ (a versão usada no CI está em `.nvmrc`).
@@ -38,6 +40,18 @@ só existe em desenvolvimento e não entra no build de produção.
 | `npm run catalog:build` | Gera `data/chords.json` a partir de `tools/`                 |
 | `npm run catalog:check` | Valida o catálogo de acordes e confere se o JSON está em dia |
 
+## Publicação
+
+Cada merge na `main` publica o app no GitHub Pages pelo workflow
+[`deploy.yml`](.github/workflows/deploy.yml), que roda os testes e `npm run build:pages`
+(build com `base href` `/hendrixx/` e um `404.html` para os links diretos às rotas do app).
+
+Na primeira vez, é preciso ativar o Pages no repositório: **Settings → Pages → Build and
+deployment → Source: GitHub Actions**.
+
+O roteiro para conferir o app em celulares e no desktop está em
+[`docs/device-testing.md`](docs/device-testing.md).
+
 ## Convenções
 
 - Commits em [Conventional Commits](https://www.conventionalcommits.org/pt-br/) (`feat:`, `fix:`, `docs:`, `chore:`, `test:`, `ci:`).
@@ -50,3 +64,4 @@ só existe em desenvolvimento e não entra no build de produção.
 - [Wireframes das telas](docs/wireframes.md)
 - [Catálogo de acordes](docs/chord-catalog.md) · dados em [`data/chords.json`](data/chords.json)
 - [Protótipo do metrônomo](prototype/README.md)
+- [Teste em aparelhos reais](docs/device-testing.md)
