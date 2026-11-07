@@ -1,0 +1,96 @@
+@switch (status()) {
+  @case ('idle') {
+    <section class="empty">
+      <h2>Nenhum treino em andamento</h2>
+      <p>Monte um treino e toque em Iniciar.</p>
+      <button type="button" class="primary" (click)="adjust()">Montar treino</button>
+    </section>
+  }
+
+  @case ('finished') {
+    <section class="done" aria-labelledby="done-title">
+      <h2 id="done-title">Treino concluído</h2>
+      <p class="done-stats">{{ summaryStats() }}</p>
+      <p class="done-config">{{ summaryConfig() }}</p>
+      <button type="button" class="primary" (click)="again()">↻ Treinar de novo</button>
+      <div class="done-row">
+        <button type="button" class="secondary" (click)="again(5)">
+          +5 bpm e de novo ({{ fasterBpm() }})
+        </button>
+        <button type="button" class="secondary" (click)="adjust()">Ajustar treino</button>
+      </div>
+    </section>
+  }
+
+  @default {
+    <section class="runner" aria-label="Treino em andamento">
+      <div class="status-bar">
+        <span class="pill" [attr.data-status]="status()">{{ statusLabel() }}</span>
+        <span>{{ cycleText() }}</span>
+        <span aria-hidden="true">·</span>
+        <span class="clock">{{ clockText() }}</span>
+      </div>
+
+      <div class="stage">
+        <span class="stage-label">{{ stageLabel() }}</span>
+        <p class="big" [class.long]="bigText().length > 4">{{ bigText() }}</p>
+        <p class="big-alt">{{ bigAlt() }}</p>
+        @if (stageChord(); as chord) {
+          <app-chord-diagram
+            class="big-diagram"
+            [class.dim]="!session.currentChord()"
+            [chord]="chord"
+            size="lg"
+          />
+        }
+        <span class="sr-only" aria-live="polite">{{ announcement() }}</span>
+      </div>
+
+      <div class="side">
+        @if (session.nextChord(); as next) {
+          <div class="next" [class.soon]="changeSoon()">
+            <app-chord-diagram class="next-diagram" [chord]="next" size="md" aria-hidden="true" />
+            <div>
+              <div class="next-label">Próximo</div>
+              <div class="next-name">{{ naming.label(next) }}</div>
+              <div class="next-alt">{{ naming.altLabel(next) }}</div>
+            </div>
+          </div>
+        }
+
+        <div class="pulse">
+          <div class="beats" role="img" [attr.aria-label]="beatLabel()">
+            @for (b of beats; track b) {
+              <span
+                class="beat"
+                [class.accent]="b === 0"
+                [class.on]="session.beatInBar() === b"
+              ></span>
+            }
+          </div>
+          <div class="bar" aria-hidden="true">
+            <span [style.width.%]="changeProgress()"></span>
+          </div>
+          <p class="caption">{{ changeCaption() }}</p>
+        </div>
+
+        <div class="tempo">
+          <button type="button" class="step" (click)="stepBpm(-5)" aria-label="Diminuir 5 bpm">
+            −5
+          </button>
+          <output class="bpm" aria-live="off">{{ session.bpm() }}<small>bpm</small></output>
+          <button type="button" class="step" (click)="stepBpm(5)" aria-label="Aumentar 5 bpm">
+            +5
+          </button>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="primary" (click)="togglePause()">
+            {{ status() === 'paused' ? '▶ Continuar' : '❚❚ Pausar' }}
+          </button>
+          <button type="button" class="secondary" (click)="stop()">■ Parar</button>
+        </div>
+      </div>
+    </section>
+  }
+}
