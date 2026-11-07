@@ -1,0 +1,57 @@
+@let g = geometry();
+<svg class="diagram" [attr.viewBox]="viewBox()" role="img" [attr.aria-label]="label()">
+  @for (fret of g.frets; track fret.y) {
+    <line
+      class="fret"
+      [attr.x1]="fret.x1"
+      [attr.x2]="fret.x2"
+      [attr.y1]="fret.y"
+      [attr.y2]="fret.y"
+    />
+  }
+  @if (g.nut; as nut) {
+    <line class="nut" [attr.x1]="nut.x1" [attr.x2]="nut.x2" [attr.y1]="nut.y" [attr.y2]="nut.y" />
+  }
+  @for (s of g.strings; track s.x) {
+    <line
+      class="string"
+      [attr.x1]="s.x"
+      [attr.x2]="s.x"
+      [attr.y1]="s.y1"
+      [attr.y2]="s.y2"
+      [attr.stroke-width]="s.width"
+    />
+  }
+  @if (g.baseFretLabel; as base) {
+    <text class="base-fret" [attr.x]="base.x" [attr.y]="base.y">{{ base.text }}</text>
+  }
+  @for (m of g.markers; track m.x) {
+    @if (m.path; as path) {
+      <path class="marker muted" [attr.d]="path" />
+    } @else {
+      <circle class="marker open" [attr.cx]="m.x" [attr.cy]="m.y" r="5.5" />
+    }
+  }
+  @if (g.barre; as b) {
+    <rect
+      class="dot barre"
+      [attr.x]="b.x"
+      [attr.y]="b.y"
+      [attr.width]="b.width"
+      [attr.height]="b.height"
+      [attr.rx]="b.height / 2"
+    />
+    @if (fingersVisible()) {
+      <text class="finger" [attr.x]="b.labelX" [attr.y]="b.labelY">1</text>
+    }
+  }
+  @for (d of g.dots; track d.x) {
+    <circle class="dot" [attr.cx]="d.x" [attr.cy]="d.y" r="9" />
+    @if (fingersVisible()) {
+      <text class="finger" [attr.x]="d.x" [attr.y]="d.y">{{ d.finger }}</text>
+    }
+  }
+  @for (n of g.notes; track n.x) {
+    <text class="note" [attr.x]="n.x" [attr.y]="n.y">{{ n.name }}</text>
+  }
+</svg>
