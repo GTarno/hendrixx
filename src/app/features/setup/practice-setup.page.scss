@@ -54,7 +54,7 @@ h2 {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 4px 4px 12px;
+  padding: 0 0 0 14px;
   border-radius: 999px;
   background: var(--accent-soft);
   border: 1.5px solid var(--accent);
@@ -78,8 +78,8 @@ h2 {
 }
 
 .icon {
-  min-width: 32px;
-  min-height: 32px;
+  min-width: 48px;
+  min-height: 48px;
   border: 0;
   border-radius: 999px;
   background: transparent;
@@ -155,9 +155,10 @@ h2 {
 }
 
 .link {
+  min-height: 48px;
   border: 0;
   background: none;
-  padding: 4px 0;
+  padding: 0;
   color: var(--accent);
   font-weight: 700;
   text-decoration: underline;
@@ -176,6 +177,7 @@ h2 {
 
 .bpm-value {
   display: inline-flex;
+  min-height: 48px;
   justify-content: center;
   align-items: baseline;
   gap: 6px;
@@ -209,7 +211,7 @@ h2 {
 
   input[type='range'] {
     width: 100%;
-    min-height: 44px;
+    min-height: 48px;
     accent-color: var(--accent);
   }
 }

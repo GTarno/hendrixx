@@ -2,7 +2,7 @@
  * Tokens de cor do Hendrixx. Paleta do protótipo: palco escuro com a luz âmbar de um
  * amplificador. O tema segue o sistema; as telas usam só estas variáveis.
  */
-:root {
+@mixin light-tokens {
   color-scheme: light;
   --bg: #e9ecf0;
   --surface: #ffffff;
@@ -14,30 +14,51 @@
   --accent-ink: #fff8ee;
   --accent-soft: rgba(166, 92, 0, 0.12);
   --warn: #b3261e;
+}
+
+@mixin dark-tokens {
+  color-scheme: dark;
+  --bg: #101216;
+  --surface: #191c22;
+  --surface-2: #232730;
+  --line: #353b48;
+  --ink: #eef0f4;
+  --muted: #9aa3b2;
+  --accent: #f2a43a;
+  --accent-ink: #1c1205;
+  --accent-soft: rgba(242, 164, 58, 0.16);
+  --warn: #ff8a7a;
+}
+
+:root {
+  @include light-tokens;
   --radius: 14px;
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
-  /* Diagramas de acorde */
+  /* Diagramas de acorde. As linhas usam 75% da cor do texto: contraste ≥ 7:1 nos dois temas. */
   --chord-ink: var(--ink);
+  --chord-fret: color-mix(in srgb, var(--ink) 75%, var(--surface));
   --chord-dot: var(--ink);
   --chord-dot-ink: var(--surface);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    color-scheme: dark;
-    --bg: #101216;
-    --surface: #191c22;
-    --surface-2: #232730;
-    --line: #353b48;
-    --ink: #eef0f4;
-    --muted: #9aa3b2;
-    --accent: #f2a43a;
-    --accent-ink: #1c1205;
-    --accent-soft: rgba(242, 164, 58, 0.16);
-    --warn: #ff8a7a;
+    @include dark-tokens;
   }
+}
+
+/*
+ * Tema da tela de treino (escuro por padrão, para ofuscar menos com o celular na estante).
+ * A classe vai no <html> enquanto a tela de treino está aberta e vence o tema do sistema.
+ */
+:root.stage-dark {
+  @include dark-tokens;
+}
+
+:root.stage-light {
+  @include light-tokens;
 }
 
 * {
@@ -123,7 +144,7 @@ legend {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 44px;
+  min-height: 48px;
   padding: 6px 14px;
   border-radius: 999px;
   border: 1.5px solid var(--line);
@@ -145,7 +166,7 @@ legend {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  min-height: 44px;
+  min-height: 48px;
   cursor: pointer;
 
   input {
@@ -190,5 +211,21 @@ legend {
     background: var(--accent-soft);
     color: var(--accent);
     box-shadow: inset 0 0 0 1.5px var(--accent);
+  }
+}
+
+/* Botão de ferramenta só com ícone (ex.: tema, tela cheia). */
+.tool {
+  min-width: 48px;
+  min-height: 48px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+
+  &[aria-pressed='true'] {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 }

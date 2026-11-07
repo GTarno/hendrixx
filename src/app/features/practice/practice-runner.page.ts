@@ -1,12 +1,29 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  computed,
+  effect,
+  inject,
+  untracked,
+  viewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { FullscreenService } from '../../core/display/fullscreen.service';
+import { StageThemeService } from '../../core/display/stage-theme.service';
+import { WakeLockService } from '../../core/display/wake-lock.service';
 import { clampBpm } from '../../core/models';
 import { ChordNamingService } from '../../core/preferences/chord-naming.service';
 import { PracticeSessionService } from '../../core/session/practice-session.service';
 import { ChordDiagramComponent } from '../../shared/chord-diagram/chord-diagram.component';
 import { MetronomeVisualComponent } from '../../shared/metronome-visual/metronome-visual.component';
+import { mediaQuerySignal } from '../../shared/media-query';
 import { formatClock } from '../../shared/time-format';
 import { PracticeDraftService } from '../setup/practice-draft.service';
+
+/** Mesma condição do layout compacto em practice-runner.page.scss. */
+const COMPACT_QUERY = '(max-width: 759px), (max-width: 1023px) and (orientation: portrait)';
 
 const STATUS_LABELS = {
   idle: 'Parado',
@@ -29,6 +46,14 @@ export class PracticeRunnerPage {
   protected readonly naming = inject(ChordNamingService);
   private readonly draft = inject(PracticeDraftService);
   private readonly router = inject(Router);
+  protected readonly stageTheme = inject(StageThemeService);
+  protected readonly fullscreen = inject(FullscreenService);
+  private readonly wakeLock = inject(WakeLockService);
+
+  private readonly runnerEl = viewChild<ElementRef<HTMLElement>>('runnerEl');
+
+  /** Celular em pé: layout compacto, sem as notas embaixo do diagrama grande. */
+  protected readonly compactLayout = mediaQuerySignal(COMPACT_QUERY);
 
   protected readonly status = this.session.status;
   protected readonly statusLabel = computed(() => STATUS_LABELS[this.status()]);
@@ -117,11 +142,32 @@ export class PracticeRunnerPage {
 
   protected readonly fasterBpm = computed(() => clampBpm(this.session.bpm() + 5));
 
+  protected readonly themeLabel = computed(() =>
+    this.stageTheme.theme() === 'dark' ? 'Usar tema claro' : 'Usar tema escuro',
+  );
+
   constructor() {
+    // Tema da tela de treino (escuro por padrão), só enquanto ela está aberta.
+    effect(() => this.stageTheme.apply(this.stageTheme.theme()));
+
+    // Tela acesa enquanto toca; na pausa e no fim, volta ao normal.
+    effect(() => {
+      const playing = this.isPlaying();
+      untracked(() => (playing ? void this.wakeLock.request() : this.wakeLock.release()));
+    });
+
     // Sair da tela (pelo cabeçalho ou voltar do navegador) encerra o treino em andamento.
     inject(DestroyRef).onDestroy(() => {
       if (this.isActive()) this.session.reset();
+      this.wakeLock.release();
+      this.stageTheme.clear();
+      void this.fullscreen.exit();
     });
+  }
+
+  protected toggleFullscreen(): void {
+    const el = this.runnerEl()?.nativeElement;
+    if (el) void this.fullscreen.toggle(el);
   }
 
   protected togglePause(): void {
