@@ -1,23 +1,24 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { App } from './app';
+import { ChordNamingService } from './core/preferences/chord-naming.service';
 
 describe('App', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [App],
-    }).compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({ imports: [App], providers: [provideRouter([])] });
   });
 
-  it('should create the app', () => {
+  it('mostra a marca e a troca de nomenclatura', () => {
     const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+    fixture.detectChanges();
+    const host = fixture.nativeElement as HTMLElement;
+    expect(host.querySelector('.brand')?.textContent).toContain('Hendrixx');
 
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hendrixx');
+    const [cifra, pt] = host.querySelectorAll<HTMLButtonElement>('.naming button');
+    expect(cifra.getAttribute('aria-pressed')).toBe('true');
+    pt.click();
+    fixture.detectChanges();
+    expect(TestBed.inject(ChordNamingService).naming()).toBe('pt');
+    expect(pt.getAttribute('aria-pressed')).toBe('true');
   });
 });

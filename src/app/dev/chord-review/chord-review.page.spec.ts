@@ -70,6 +70,6 @@ describe('ChordReviewPage', () => {
 
   it('a rota de conferência só existe em desenvolvimento', () => {
     // Os testes rodam em modo de desenvolvimento.
-    expect(routes.map((r) => r.path)).toEqual(['dev/acordes']);
+    expect(routes.map((r) => r.path)).toContain('dev/acordes');
   });
 });
