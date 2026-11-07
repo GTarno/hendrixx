@@ -1,0 +1,23 @@
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  max-width: 1080px;
+  margin: 0 auto 12px;
+  padding: 10px 16px;
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+}
+
+.text {
+  flex: 1 1 200px;
+  font-weight: 600;
+}
+
+.primary,
+.secondary {
+  min-height: 48px;
+  padding: 0 16px;
+}

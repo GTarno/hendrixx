@@ -9,6 +9,9 @@ metrônomo configurável.
 
 **App publicado:** https://gtarno.github.io/hendrixx/
 
+O app é um PWA: pode ser instalado no celular ou no computador e funciona sem internet depois
+da primeira visita.
+
 ## Como rodar
 
 Requer Node.js 22.22+ ou 24.15+ (a versão usada no CI está em `.nvmrc`).
