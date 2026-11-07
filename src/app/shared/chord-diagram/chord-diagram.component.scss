@@ -1,0 +1,80 @@
+:host {
+  display: block;
+  color: inherit;
+  --_ink: var(--chord-ink, currentColor);
+  --_fret: var(--chord-fret, color-mix(in srgb, currentColor 60%, transparent));
+  --_dot: var(--chord-dot, currentColor);
+  --_dot-ink: var(--chord-dot-ink, Canvas);
+  --_muted: var(--chord-muted, color-mix(in srgb, currentColor 65%, transparent));
+}
+
+:host([data-size='mini']) {
+  width: 48px;
+}
+
+:host([data-size='md']) {
+  width: 128px;
+}
+
+:host([data-size='lg']) {
+  width: 100%;
+  max-width: 320px;
+}
+
+.diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.fret,
+.string {
+  stroke: var(--_fret);
+}
+
+.fret {
+  stroke-width: 1.5;
+}
+
+.nut {
+  stroke: var(--_ink);
+  stroke-width: 6;
+  stroke-linecap: square;
+}
+
+.marker {
+  fill: none;
+  stroke: var(--_ink);
+  stroke-width: 2;
+}
+
+.dot {
+  fill: var(--_dot);
+}
+
+.finger {
+  fill: var(--_dot-ink);
+  font:
+    700 11px system-ui,
+    sans-serif;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.base-fret {
+  fill: var(--_ink);
+  font:
+    700 12px system-ui,
+    sans-serif;
+  text-anchor: end;
+  dominant-baseline: central;
+}
+
+.note {
+  fill: var(--_muted);
+  font:
+    500 10px ui-monospace,
+    monospace;
+  text-anchor: middle;
+}
