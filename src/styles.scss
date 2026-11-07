@@ -1,9 +1,172 @@
+/*
+ * Tokens de cor do Hendrixx. Paleta do protótipo: palco escuro com a luz âmbar de um
+ * amplificador. O tema segue o sistema; as telas usam só estas variáveis.
+ */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
+  --bg: #e9ecf0;
+  --surface: #ffffff;
+  --surface-2: #dde1e7;
+  --line: #c3c9d2;
+  --ink: #14171c;
+  --muted: #555d6b;
+  --accent: #a65c00;
+  --accent-ink: #fff8ee;
+  --accent-soft: rgba(166, 92, 0, 0.12);
+  --warn: #b3261e;
+  --radius: 14px;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Diagramas de acorde */
+  --chord-ink: var(--ink);
+  --chord-dot: var(--ink);
+  --chord-dot-ink: var(--surface);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #101216;
+    --surface: #191c22;
+    --surface-2: #232730;
+    --line: #353b48;
+    --ink: #eef0f4;
+    --muted: #9aa3b2;
+    --accent: #f2a43a;
+    --accent-ink: #1c1205;
+    --accent-soft: rgba(242, 164, 58, 0.16);
+    --warn: #ff8a7a;
+  }
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background: Canvas;
-  color: CanvasText;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- formulários e botões compartilhados pelas telas ---------- */
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+}
+
+legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.step,
+.secondary {
+  min-height: 48px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.secondary {
+  padding: 0 14px;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  cursor: pointer;
+
+  input[type='radio'] {
+    margin: 0;
+    accent-color: var(--accent);
+  }
+
+  &:has(input[type='radio']:checked) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    font-weight: 700;
+  }
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  cursor: pointer;
+
+  input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent);
+  }
+}
+
+.primary {
+  min-height: 56px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
 }

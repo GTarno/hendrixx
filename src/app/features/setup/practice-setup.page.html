@@ -1,0 +1,242 @@
+<form class="setup" (submit)="start($event)" novalidate>
+  <div class="columns">
+    <section class="panel chords-panel" aria-labelledby="chords-title">
+      <h2 id="chords-title">Acordes do treino ({{ draft.chordIds().length }})</h2>
+
+      @let cycle = draft.cycle();
+      @if (cycle.forward.length) {
+        <ol class="cycle" aria-label="Ordem do ciclo">
+          @for (c of cycle.forward; track c.id; let first = $first, last = $last) {
+            <li class="cycle-item">
+              <span class="cycle-name">{{ naming.label(c) }}</span>
+              <span class="cycle-actions">
+                <button
+                  type="button"
+                  class="icon"
+                  [disabled]="first"
+                  (click)="draft.moveChord(c.id, -1)"
+                  [attr.aria-label]="'Mover ' + naming.label(c) + ' para antes'"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  class="icon"
+                  [disabled]="last"
+                  (click)="draft.moveChord(c.id, 1)"
+                  [attr.aria-label]="'Mover ' + naming.label(c) + ' para depois'"
+                >
+                  ›
+                </button>
+                <button
+                  type="button"
+                  class="icon"
+                  (click)="draft.removeChord(c.id)"
+                  [attr.aria-label]="'Remover ' + naming.label(c)"
+                >
+                  ×
+                </button>
+              </span>
+            </li>
+          }
+          @for (c of cycle.back; track $index) {
+            <li class="cycle-item back" aria-label="volta do ping-pong">
+              <span class="cycle-name">{{ naming.label(c) }}</span>
+            </li>
+          }
+        </ol>
+      } @else {
+        <p class="empty">Toque nos acordes abaixo para montar o ciclo.</p>
+      }
+
+      <div class="chips" role="group" aria-label="Escolher acordes">
+        @for (c of available(); track c.id) {
+          <button
+            type="button"
+            class="chip"
+            [attr.aria-pressed]="draft.isSelected(c.id)"
+            (click)="draft.toggleChord(c.id)"
+          >
+            @if (draft.isSelected(c.id)) {
+              <span class="chip-order" aria-hidden="true">{{ orderPosition(c.id) }}</span>
+            }
+            @if (c.difficulty === 3) {
+              <span class="chip-hard" title="Com pestana" aria-hidden="true">▲</span>
+            }
+            <app-chord-diagram [chord]="c" size="mini" aria-hidden="true" />
+            <span class="chip-name">{{ naming.label(c) }}</span>
+            @if (c.difficulty === 3) {
+              <span class="sr-only">, com pestana</span>
+            }
+          </button>
+        }
+      </div>
+
+      <div class="links">
+        <button type="button" class="link" (click)="draft.resetChords()">
+          Voltar para C, D, E, F
+        </button>
+        <button type="button" class="link" (click)="draft.clearChords()">Limpar</button>
+      </div>
+    </section>
+
+    <div class="panel controls">
+      <fieldset>
+        <legend>Andamento</legend>
+        <div class="bpm">
+          <button
+            type="button"
+            class="step"
+            (click)="draft.stepBpm(-5)"
+            aria-label="Diminuir 5 bpm"
+          >
+            −5
+          </button>
+          <label class="bpm-value">
+            <input
+              id="bpm"
+              type="number"
+              inputmode="numeric"
+              [min]="limits.bpmMin"
+              [max]="limits.bpmMax"
+              [value]="draft.bpm()"
+              (input)="setBpm($event)"
+              (blur)="commitBpm($event)"
+              aria-describedby="tap-hint"
+            />
+            <span>bpm</span>
+          </label>
+          <button type="button" class="step" (click)="draft.stepBpm(5)" aria-label="Aumentar 5 bpm">
+            +5
+          </button>
+        </div>
+        <div class="bpm-row">
+          <input
+            id="bpm-range"
+            type="range"
+            [min]="limits.bpmMin"
+            [max]="limits.bpmMax"
+            step="1"
+            [value]="draft.bpm()"
+            (input)="draft.setBpm(numberFrom($event))"
+            aria-label="Andamento em bpm"
+          />
+          <button type="button" class="secondary" (click)="tap()">Tap tempo</button>
+        </div>
+        <p class="hint" id="tap-hint" aria-live="polite">{{ tapHint() }}</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Tempos por acorde</legend>
+        <div class="options">
+          @for (n of beatOptions; track n) {
+            <label class="option">
+              <input
+                type="radio"
+                name="beats"
+                [value]="n"
+                [checked]="draft.beatsPerChord() === n"
+                (change)="setBeats(n)"
+              />
+              {{ n }}
+            </label>
+          }
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Ordem</legend>
+        <div class="options">
+          @for (o of orders; track o[0]) {
+            <label class="option">
+              <input
+                type="radio"
+                name="order"
+                [value]="o[0]"
+                [checked]="draft.order() === o[0]"
+                (change)="draft.order.set(o[0])"
+              />
+              {{ o[1] }}
+            </label>
+          }
+        </div>
+        @if (draft.order() === 'random' && draft.chordIds().length === 2) {
+          <p class="hint">Com 2 acordes, a ordem aleatória vira alternância.</p>
+        }
+      </fieldset>
+
+      <fieldset>
+        <legend>Parar</legend>
+        <div class="options">
+          <label class="option">
+            <input
+              type="radio"
+              name="stop"
+              value="infinite"
+              [checked]="draft.stopType() === 'infinite'"
+              (change)="setStopType('infinite')"
+            />
+            Nunca
+          </label>
+          <label class="option">
+            <input
+              type="radio"
+              name="stop"
+              value="cycles"
+              [checked]="draft.stopType() === 'cycles'"
+              (change)="setStopType('cycles')"
+            />
+            Após
+            <input
+              class="small-number"
+              type="number"
+              inputmode="numeric"
+              aria-label="Número de ciclos"
+              [min]="limits.cyclesMin"
+              [max]="limits.cyclesMax"
+              [value]="draft.stopCycles()"
+              [disabled]="draft.stopType() !== 'cycles'"
+              (change)="draft.setStopCycles(numberFrom($event))"
+            />
+            ciclos
+          </label>
+          <label class="option">
+            <input
+              type="radio"
+              name="stop"
+              value="minutes"
+              [checked]="draft.stopType() === 'minutes'"
+              (change)="setStopType('minutes')"
+            />
+            Após
+            <input
+              class="small-number"
+              type="number"
+              inputmode="numeric"
+              aria-label="Número de minutos"
+              [min]="limits.minutesMin"
+              [max]="limits.minutesMax"
+              [value]="draft.stopMinutes()"
+              [disabled]="draft.stopType() !== 'minutes'"
+              (change)="draft.setStopMinutes(numberFrom($event))"
+            />
+            min
+          </label>
+        </div>
+      </fieldset>
+
+      <label class="check">
+        <input type="checkbox" [checked]="draft.countIn()" (change)="setCountIn($event)" />
+        Contagem de 1 compasso antes de começar
+      </label>
+    </div>
+  </div>
+
+  <footer class="start-bar">
+    <p class="summary" aria-live="polite">{{ summary() }}</p>
+    @if (blocker(); as message) {
+      <p class="blocker" role="alert">{{ message }}</p>
+    }
+    <button type="submit" class="primary" [disabled]="!draft.canStart()">▶ Iniciar</button>
+  </footer>
+</form>

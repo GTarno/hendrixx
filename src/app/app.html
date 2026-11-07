@@ -1,5 +1,24 @@
-<main class="shell">
-  <h1>Hendrixx</h1>
-  <p>Treino de troca de acordes com metrônomo.</p>
+<header class="top">
+  <a class="brand" routerLink="/">Hendrixx</a>
+  <div class="naming" role="group" aria-label="Nomes dos acordes">
+    <button
+      type="button"
+      [attr.aria-pressed]="naming.naming() === 'cifra'"
+      (click)="naming.set('cifra')"
+      title="Cifra"
+    >
+      C
+    </button>
+    <button
+      type="button"
+      [attr.aria-pressed]="naming.naming() === 'pt'"
+      (click)="naming.set('pt')"
+      title="Português"
+    >
+      Dó
+    </button>
+  </div>
+</header>
+<main>
+  <router-outlet />
 </main>
-<router-outlet />
