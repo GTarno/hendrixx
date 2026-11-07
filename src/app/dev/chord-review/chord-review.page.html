@@ -1,0 +1,62 @@
+<section class="review">
+  <header class="review-head">
+    <h2>Conferência dos diagramas</h2>
+    <p>
+      Compare cada diagrama com a sua fonte de estudo: cordas soltas e abafadas, casas, dedos,
+      pestana e notas. Página só de desenvolvimento.
+    </p>
+    <div class="phases" role="group" aria-label="Fase do catálogo">
+      @for (p of phases; track p.value) {
+        <button
+          type="button"
+          [attr.aria-pressed]="phase() === p.value"
+          (click)="phase.set(p.value)"
+        >
+          {{ p.label }}
+        </button>
+      }
+    </div>
+    <p class="count">{{ chords().length }} acordes</p>
+  </header>
+
+  <ol class="cards">
+    @for (c of chords(); track c.id) {
+      <li class="card">
+        <div class="names">
+          <span class="cifra">{{ c.labelCifra }}</span>
+          <span class="pt">{{ c.labelPt }}</span>
+          @if (c.variantName) {
+            <span class="variant">{{ c.variantName }}</span>
+          }
+        </div>
+        <div class="sizes">
+          <app-chord-diagram [chord]="c" size="lg" class="lg" />
+          <div class="small">
+            <app-chord-diagram [chord]="c" size="md" />
+            <app-chord-diagram [chord]="c" size="mini" />
+          </div>
+        </div>
+        <dl class="facts">
+          <dt>Formação</dt>
+          <dd>{{ shapeText(c.strings) }}</dd>
+          <dt>Dedos</dt>
+          <dd>{{ fingersText(c.strings) }}</dd>
+          <dt>Pestana</dt>
+          <dd>
+            @if (c.barre; as b) {
+              casa {{ b.fret }}, {{ b.fromString }}ª → {{ b.toString }}ª
+            } @else {
+              –
+            }
+          </dd>
+          <dt>Notas</dt>
+          <dd>{{ c.notes.join(' ') }}</dd>
+          <dt>Dificuldade</dt>
+          <dd [attr.aria-label]="'nível ' + c.difficulty">{{ difficultyText(c.difficulty) }}</dd>
+          <dt>Id</dt>
+          <dd>{{ c.id }}</dd>
+        </dl>
+      </li>
+    }
+  </ol>
+</section>
