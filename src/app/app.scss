@@ -16,6 +16,9 @@
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
   font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -32,7 +35,7 @@
 
   button {
     min-width: 48px;
-    min-height: 40px;
+    min-height: 48px;
     border: 0;
     background: transparent;
     font-weight: 700;
@@ -42,5 +45,11 @@
   button[aria-pressed='true'] {
     background: var(--ink);
     color: var(--bg);
+  }
+}
+
+@media (max-height: 740px) and (orientation: portrait) {
+  .top {
+    padding-block: max(4px, env(safe-area-inset-top, 0px)) 4px;
   }
 }

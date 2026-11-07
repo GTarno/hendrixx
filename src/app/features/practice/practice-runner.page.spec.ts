@@ -3,6 +3,7 @@ import { Router, provideRouter } from '@angular/router';
 import { AUDIO_CONTEXT_FACTORY, MetronomeService } from '../../core/audio/metronome.service';
 import { SCHEDULER_TIMER } from '../../core/audio/scheduler-timer';
 import { FakeAudioContext, FakeTimer, advanceTo } from '../../core/audio/testing/fake-audio';
+import { WakeLockService } from '../../core/display/wake-lock.service';
 import { PracticeConfig, createPracticeConfig } from '../../core/models';
 import { ChordNamingService } from '../../core/preferences/chord-naming.service';
 import { PracticeSessionService } from '../../core/session/practice-session.service';
@@ -207,6 +208,45 @@ describe('PracticeRunnerPage', () => {
       button('Ajustar treino')?.click();
       expect(navigate).toHaveBeenCalledWith(['/']);
       expect(session.status()).toBe('idle');
+    });
+  });
+
+  describe('tema, tela acesa e tela cheia', () => {
+    it('usa o tema escuro por padrão e o retira ao sair', () => {
+      const { fixture, update } = render({});
+      update();
+      expect(document.documentElement.classList.contains('stage-dark')).toBe(true);
+      fixture.destroy();
+      expect(document.documentElement.classList.contains('stage-dark')).toBe(false);
+    });
+
+    it('alterna o tema pelo botão', () => {
+      const { button, update } = render({});
+      update();
+      button('Usar tema claro')?.click();
+      update();
+      expect(document.documentElement.classList.contains('stage-light')).toBe(true);
+      expect(button('Usar tema escuro')).toBeDefined();
+      button('Usar tema escuro')?.click();
+      update();
+    });
+
+    it('mantém a tela acesa só enquanto toca', () => {
+      const wakeLock = TestBed.inject(WakeLockService);
+      const request = vi.spyOn(wakeLock, 'request').mockResolvedValue();
+      const release = vi.spyOn(wakeLock, 'release');
+      const { at, button, update } = render({});
+      update();
+      expect(request).toHaveBeenCalled();
+      at(5.1);
+      button('❚❚ Pausar')?.click();
+      update();
+      expect(release).toHaveBeenCalled();
+    });
+
+    it('sem suporte a tela cheia, não mostra o botão', () => {
+      const { button } = render({});
+      expect(button('Tela cheia')).toBeUndefined();
     });
   });
 

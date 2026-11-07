@@ -23,12 +23,36 @@
   }
 
   @default {
-    <section class="runner" aria-label="Treino em andamento">
+    <section #runnerEl class="runner" aria-label="Treino em andamento">
       <div class="status-bar">
         <span class="pill" [attr.data-status]="status()">{{ statusLabel() }}</span>
-        <span>{{ cycleText() }}</span>
-        <span aria-hidden="true">·</span>
-        <span class="clock">{{ clockText() }}</span>
+        <span class="info">
+          <span>{{ cycleText() }}</span>
+          <span class="clock">{{ clockText() }}</span>
+        </span>
+        <span class="tools">
+          <button
+            type="button"
+            class="tool"
+            (click)="stageTheme.toggle()"
+            [attr.aria-label]="themeLabel()"
+            [title]="themeLabel()"
+          >
+            {{ stageTheme.theme() === 'dark' ? '☀' : '☾' }}
+          </button>
+          @if (fullscreen.supported) {
+            <button
+              type="button"
+              class="tool"
+              (click)="toggleFullscreen()"
+              [attr.aria-pressed]="fullscreen.active()"
+              [attr.aria-label]="fullscreen.active() ? 'Sair da tela cheia' : 'Tela cheia'"
+              [title]="fullscreen.active() ? 'Sair da tela cheia' : 'Tela cheia'"
+            >
+              ⛶
+            </button>
+          }
+        </span>
       </div>
 
       <div class="stage">
@@ -40,6 +64,7 @@
             class="big-diagram"
             [class.dim]="!session.currentChord()"
             [chord]="chord"
+            [showNotes]="!compactLayout()"
             size="lg"
           />
         }
