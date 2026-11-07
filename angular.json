@@ -52,7 +52,8 @@
                   "replace": "src/app/dev/dev.routes.ts",
                   "with": "src/app/dev/dev.routes.prod.ts"
                 }
-              ]
+              ],
+              "serviceWorker": "ngsw-config.json"
             },
             "development": {
               "optimization": false,

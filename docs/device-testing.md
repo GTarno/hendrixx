@@ -56,7 +56,24 @@ bloquear não é defeito do app. Ao desbloquear, use **Pausar** e **Continuar** 
 - [ ] O tema da tela de treino é escuro e o botão ☀/☾ troca para o claro.
 - [ ] Todos os botões são fáceis de tocar com o polegar.
 
-### 6. Desktop (só no computador)
+### 6. Instalação e uso sem internet (PWA)
+
+Instale o app pela página publicada:
+
+- **Android (Chrome):** menu ⋮ → **Instalar app** (ou **Adicionar à tela inicial**).
+- **iPhone (Safari):** botão **Compartilhar** → **Adicionar à Tela de Início**.
+- **Desktop (Chrome/Edge):** ícone de instalar na barra de endereço.
+
+- [ ] O ícone do Hendrixx (metrônomo âmbar) aparece na tela inicial.
+- [ ] O app abre em tela própria, sem a barra do navegador.
+- [ ] Com o **modo avião** ligado, o app abre e roda um treino completo.
+- [ ] Depois de publicar uma versão nova, ao abrir o app aparece o aviso **Há uma versão nova do
+      Hendrixx** com o botão **Atualizar** (o aviso nunca aparece no meio de um treino).
+
+Abra o app uma vez com internet antes de testar o modo avião: é nessa primeira visita que ele
+fica guardado no aparelho.
+
+### 7. Desktop (só no computador)
 
 - [ ] Botão ⛶ e tecla **F** entram e saem da tela cheia.
 - [ ] Atalhos: **Espaço** pausa, **Esc** para, **↑/↓** mudam o BPM, **N** troca cifra/português.
@@ -66,8 +83,8 @@ bloquear não é defeito do app. Ao desbloquear, use **Pausar** e **Continuar** 
 Preencha uma linha por aparelho testado. Use ✅ (ok), ⚠️ (funciona com ressalva) ou ❌ (falhou)
 e descreva ressalvas e falhas nas observações.
 
-| Data | Aparelho | Sistema e navegador | 1. Início | 2. Precisão (60/120/200) | 3. Visual | 4. Segundo plano | 5. Layout | 6. Desktop | Observações |
-| ---- | -------- | ------------------- | --------- | ------------------------ | --------- | ---------------- | --------- | ---------- | ----------- |
-|      |          |                     |           |                          |           |                  |           |            |             |
+| Data | Aparelho | Sistema e navegador | 1. Início | 2. Precisão (60/120/200) | 3. Visual | 4. Segundo plano | 5. Layout | 6. PWA | 7. Desktop | Observações |
+| ---- | -------- | ------------------- | --------- | ------------------------ | --------- | ---------------- | --------- | ------ | ---------- | ----------- |
+|      |          |                     |           |                          |           |                  |           |        |            |             |
 
 Navegadores a cobrir: Chrome no desktop, Safari no iOS e Chrome no Android.

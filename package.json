@@ -13,7 +13,8 @@
     "test:watch": "ng test",
     "catalog:build": "node tools/build-chord-catalog.mjs",
     "catalog:check": "node tools/build-chord-catalog.mjs --check",
-    "build:pages": "ng build --base-href /hendrixx/ && node tools/pages-fallback.mjs"
+    "build:pages": "ng build --base-href /hendrixx/ && node tools/pages-fallback.mjs",
+    "icons": "node tools/icons/build-icons.cjs"
   },
   "private": true,
   "packageManager": "npm@10.9.9",
@@ -24,6 +25,7 @@
     "@angular/forms": "^22.2.0",
     "@angular/platform-browser": "^22.2.0",
     "@angular/router": "^22.2.0",
+    "@angular/service-worker": "^22.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

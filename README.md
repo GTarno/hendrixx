@@ -9,6 +9,9 @@ metrônomo configurável.
 
 **App publicado:** https://gtarno.github.io/hendrixx/
 
+O app é um PWA: pode ser instalado no celular ou no computador e funciona sem internet depois
+da primeira visita.
+
 ## Como rodar
 
 Requer Node.js 22.22+ ou 24.15+ (a versão usada no CI está em `.nvmrc`).
@@ -32,6 +35,8 @@ só existe em desenvolvimento e não entra no build de produção.
 | ----------------------- | ------------------------------------------------------------ |
 | `npm start`             | Servidor de desenvolvimento com recarga automática           |
 | `npm run build`         | Build de produção em `dist/hendrixx`                         |
+| `npm run build:pages`   | Build para o GitHub Pages (`/hendrixx/`)                     |
+| `npm run icons`         | Gera os ícones do PWA a partir de `tools/icons/icon.svg`     |
 | `npm test`              | Testes unitários (Vitest), uma execução                      |
 | `npm run test:watch`    | Testes em modo watch                                         |
 | `npm run lint`          | ESLint (angular-eslint)                                      |

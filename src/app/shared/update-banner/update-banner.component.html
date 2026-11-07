@@ -1,0 +1,15 @@
+@if (visible()) {
+  <div class="banner" role="status">
+    <span class="text">
+      @if (state() === 'broken') {
+        O app precisa ser recarregado para continuar funcionando.
+      } @else {
+        Há uma versão nova do Hendrixx.
+      }
+    </span>
+    <button type="button" class="primary" (click)="reload()">Atualizar</button>
+    @if (state() === 'ready') {
+      <button type="button" class="secondary" (click)="dismiss()">Depois</button>
+    }
+  </div>
+}
