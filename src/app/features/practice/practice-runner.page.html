@@ -104,6 +104,17 @@
           </button>
           <button type="button" class="secondary" (click)="stop()">■ Parar</button>
         </div>
+
+        <p class="kbd-hint">
+          @for (s of shortcuts; track s.label) {
+            <span>
+              @for (k of s.keys; track k) {
+                <kbd>{{ k }}</kbd>
+              }
+              {{ s.label }}
+            </span>
+          }
+        </p>
       </div>
     </section>
   }

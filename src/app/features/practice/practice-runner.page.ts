@@ -21,6 +21,7 @@ import { MetronomeVisualComponent } from '../../shared/metronome-visual/metronom
 import { mediaQuerySignal } from '../../shared/media-query';
 import { formatClock } from '../../shared/time-format';
 import { PracticeDraftService } from '../setup/practice-draft.service';
+import { SHORTCUT_HELP, ShortcutAction, shortcutFor } from './shortcuts';
 
 /** Mesma condição do layout compacto em practice-runner.page.scss. */
 const COMPACT_QUERY = '(max-width: 759px), (max-width: 1023px) and (orientation: portrait)';
@@ -40,6 +41,7 @@ const STATUS_LABELS = {
   templateUrl: './practice-runner.page.html',
   styleUrl: './practice-runner.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '(document:keydown)': 'onKeydown($event)' },
 })
 export class PracticeRunnerPage {
   protected readonly session = inject(PracticeSessionService);
@@ -163,6 +165,41 @@ export class PracticeRunnerPage {
       this.stageTheme.clear();
       void this.fullscreen.exit();
     });
+  }
+
+  protected readonly shortcuts = SHORTCUT_HELP;
+
+  /** Atalhos de teclado (Espaço, Esc, ↑/↓, F, N). */
+  protected onKeydown(event: KeyboardEvent): void {
+    const action = shortcutFor(event);
+    if (action && this.runShortcut(action)) event.preventDefault();
+  }
+
+  /** Executa o atalho se ele fizer sentido agora; devolve se executou. */
+  private runShortcut(action: ShortcutAction): boolean {
+    if (action === 'naming') {
+      this.naming.toggle();
+      return true;
+    }
+    if (!this.isActive()) return false;
+    switch (action) {
+      case 'toggle-pause':
+        this.togglePause();
+        return true;
+      case 'stop':
+        this.stop();
+        return true;
+      case 'bpm-up':
+        this.stepBpm(5);
+        return true;
+      case 'bpm-down':
+        this.stepBpm(-5);
+        return true;
+      case 'fullscreen':
+        if (!this.fullscreen.supported) return false;
+        this.toggleFullscreen();
+        return true;
+    }
   }
 
   protected toggleFullscreen(): void {
