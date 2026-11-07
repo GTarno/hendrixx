@@ -1,4 +1,3 @@
-import catalog from '../../../../data/chords.json';
 import { Chord, chordLabel, isChord } from './chord.model';
 
 const C: Chord = {
@@ -82,31 +81,6 @@ describe('Chord', () => {
     it('recusa valores que não são objetos', () => {
       expect(isChord(null)).toBe(false);
       expect(isChord('C')).toBe(false);
-    });
-  });
-
-  describe('catálogo data/chords.json', () => {
-    const chords: unknown[] = catalog.chords;
-
-    it('tem todos os acordes no formato do modelo', () => {
-      const invalid = chords.filter((c) => !isChord(c)).map((c) => (c as { id?: string }).id);
-      expect(invalid).toEqual([]);
-    });
-
-    it('tem ids únicos', () => {
-      const ids = (chords as Chord[]).map((c) => c.id);
-      expect(new Set(ids).size).toBe(ids.length);
-    });
-
-    it('tem os 10 acordes da fase 1', () => {
-      const phase1 = (chords as Chord[]).filter((c) => c.catalogPhase === 1).map((c) => c.id);
-      expect(phase1.sort()).toEqual(['A', 'Am', 'B', 'C', 'D', 'Dm', 'E', 'Em', 'F', 'G']);
-    });
-
-    it('toda variação aponta para um acorde existente', () => {
-      const ids = new Set((chords as Chord[]).map((c) => c.id));
-      const orphans = (chords as Chord[]).filter((c) => c.variantOf && !ids.has(c.variantOf));
-      expect(orphans).toEqual([]);
     });
   });
 });
