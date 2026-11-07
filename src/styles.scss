@@ -229,3 +229,30 @@ legend {
     color: var(--accent);
   }
 }
+
+/* Legenda de atalhos de teclado: só onde há teclado e mouse. */
+.kbd-hint {
+  display: none;
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .kbd-hint {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+  }
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  margin-right: 2px;
+  padding: 0 5px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font: 0.75rem var(--font-mono);
+  text-align: center;
+}

@@ -250,6 +250,87 @@ describe('PracticeRunnerPage', () => {
     });
   });
 
+  describe('atalhos de teclado', () => {
+    const press = (key: string, target: EventTarget = document.body) => {
+      const event = new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true });
+      target.dispatchEvent(event);
+      return event;
+    };
+
+    it('Espaço pausa e continua, sem rolar a página', () => {
+      const { at, update, text } = render({});
+      at(5.1);
+      const event = press(' ');
+      update();
+      expect(event.defaultPrevented).toBe(true);
+      expect(text('.pill')).toBe('Pausado');
+      press(' ');
+      update();
+      expect(text('.pill')).toBe('Contagem');
+    });
+
+    it('↑ e ↓ mudam o BPM em 5', () => {
+      const { at, update, text } = render({});
+      at(5.1);
+      press('ArrowUp');
+      press('ArrowUp');
+      press('ArrowDown');
+      update();
+      expect(text('.bpm')).toBe('65bpm');
+    });
+
+    it('N troca a nomenclatura', () => {
+      const { at, update, text } = render({ countIn: false });
+      at(0.1);
+      press('n');
+      update();
+      expect(text('.big')).toBe('Dó');
+      press('N');
+      update();
+      expect(text('.big')).toBe('C');
+    });
+
+    it('Esc para e mostra o resumo', () => {
+      const { at, update, text } = render({ countIn: false });
+      at(2.1);
+      press('Escape');
+      update();
+      expect(text('h2')).toBe('Treino concluído');
+    });
+
+    it('F não faz nada sem suporte a tela cheia, e o atalho não é consumido', () => {
+      const { at } = render({});
+      at(1.1);
+      expect(press('f').defaultPrevented).toBe(false);
+    });
+
+    it('sem treino em andamento, só N vale', () => {
+      const { update } = render();
+      expect(press(' ').defaultPrevented).toBe(false);
+      expect(press('ArrowUp').defaultPrevented).toBe(false);
+      expect(press('n').defaultPrevented).toBe(true);
+      update();
+      expect(TestBed.inject(ChordNamingService).naming()).toBe('pt');
+    });
+
+    it('com um botão focado, o Espaço aciona o botão e não pausa de novo', () => {
+      const { at, update, text, button } = render({});
+      at(5.1);
+      const pause = button('❚❚ Pausar');
+      if (!pause) throw new Error('botão Pausar ausente');
+      press(' ', pause);
+      update();
+      expect(text('.pill')).toBe('Tocando');
+    });
+
+    it('mostra a legenda dos atalhos', () => {
+      const { at, host } = render({});
+      at(1.1);
+      const keys = [...host.querySelectorAll('.kbd-hint kbd')].map((k) => k.textContent?.trim());
+      expect(keys).toEqual(['Espaço', 'Esc', '↑', '↓', 'F', 'N']);
+    });
+  });
+
   it('sair da tela encerra o treino em andamento', () => {
     const { fixture, at } = render({});
     at(5.1);
