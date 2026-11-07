@@ -6,92 +6,8 @@ import {
   MetronomeService,
   ScheduledBeat,
 } from './metronome.service';
-import { SCHEDULER_TIMER, SchedulerTimer, WorkerSchedulerTimer } from './scheduler-timer';
-
-// ---------- AudioContext falso, com relógio controlado pelo teste ----------
-
-class FakeParam {
-  value = 0;
-  setValueAtTime(): this {
-    return this;
-  }
-  exponentialRampToValueAtTime(): this {
-    return this;
-  }
-}
-
-class FakeNode {
-  disconnected = false;
-  connect<T>(node: T): T {
-    return node;
-  }
-  disconnect(): void {
-    this.disconnected = true;
-  }
-}
-
-class FakeGain extends FakeNode {
-  gain = new FakeParam();
-}
-
-class FakeOscillator extends FakeNode {
-  type = 'sine';
-  frequency = new FakeParam();
-  startTime = Number.NaN;
-  output: FakeGain | null = null;
-  override connect<T>(node: T): T {
-    this.output = node as unknown as FakeGain;
-    return node;
-  }
-  start(time: number): void {
-    this.startTime = time;
-  }
-  stop(): void {
-    /* nada */
-  }
-}
-
-class FakeAudioContext {
-  currentTime = 0;
-  state: AudioContextState = 'running';
-  destination = new FakeNode();
-  oscillators: FakeOscillator[] = [];
-  resume = vi.fn(async () => {
-    this.state = 'running';
-  });
-  close = vi.fn(async () => {
-    this.state = 'closed';
-  });
-  createOscillator(): FakeOscillator {
-    const osc = new FakeOscillator();
-    this.oscillators.push(osc);
-    return osc;
-  }
-  createGain(): FakeGain {
-    return new FakeGain();
-  }
-  /** Momentos de início de todos os cliques agendados. */
-  clickTimes(): number[] {
-    return this.oscillators.map((o) => o.startTime);
-  }
-}
-
-class FakeTimer implements SchedulerTimer {
-  callback: (() => void) | null = null;
-  intervalMs = 0;
-  starts = 0;
-  start(callback: () => void, intervalMs: number): void {
-    this.callback = callback;
-    this.intervalMs = intervalMs;
-    this.starts++;
-  }
-  stop(): void {
-    this.callback = null;
-  }
-  tick(): void {
-    this.callback?.();
-  }
-}
+import { SCHEDULER_TIMER, WorkerSchedulerTimer } from './scheduler-timer';
+import { FakeAudioContext, FakeTimer, advanceTo as advanceClock } from './testing/fake-audio';
 
 describe('MetronomeService', () => {
   let ctx: FakeAudioContext;
@@ -99,13 +15,7 @@ describe('MetronomeService', () => {
   let factory: ReturnType<typeof vi.fn>;
   let metronome: MetronomeService;
 
-  /** Avança o relógio de áudio em passos de 25 ms, acordando o agendador a cada passo. */
-  function advanceTo(seconds: number): void {
-    while (ctx.currentTime < seconds - 1e-9) {
-      ctx.currentTime = Math.min(seconds, +(ctx.currentTime + 0.025).toFixed(6));
-      timer.tick();
-    }
-  }
+  const advanceTo = (seconds: number) => advanceClock(ctx, timer, seconds);
 
   const diffs = (times: number[]) => times.slice(1).map((t, i) => t - times[i]);
 
@@ -131,7 +41,7 @@ describe('MetronomeService', () => {
   it('retoma um AudioContext suspenso ao iniciar', () => {
     ctx.state = 'suspended';
     metronome.start();
-    expect(ctx.resume).toHaveBeenCalled();
+    expect(ctx.resumeCalls).toBe(1);
   });
 
   it('agenda o primeiro clique 50 ms à frente e só o que cabe na janela de 100 ms', () => {
@@ -295,7 +205,7 @@ describe('MetronomeService', () => {
   it('fecha o AudioContext quando o injetor é destruído', () => {
     metronome.start();
     TestBed.resetTestingModule();
-    expect(ctx.close).toHaveBeenCalled();
+    expect(ctx.closeCalls).toBe(1);
     expect(timer.callback).toBeNull();
   });
 });
