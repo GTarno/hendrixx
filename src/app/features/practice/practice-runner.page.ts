@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BEATS_PER_BAR, clampBpm } from '../../core/models';
+import { clampBpm } from '../../core/models';
 import { ChordNamingService } from '../../core/preferences/chord-naming.service';
 import { PracticeSessionService } from '../../core/session/practice-session.service';
 import { ChordDiagramComponent } from '../../shared/chord-diagram/chord-diagram.component';
+import { MetronomeVisualComponent } from '../../shared/metronome-visual/metronome-visual.component';
 import { formatClock } from '../../shared/time-format';
 import { PracticeDraftService } from '../setup/practice-draft.service';
 
@@ -18,7 +19,7 @@ const STATUS_LABELS = {
 /** Tela 2: treino em andamento e resumo (docs/wireframes.md, telas 2 e 2b). */
 @Component({
   selector: 'app-practice-runner-page',
-  imports: [ChordDiagramComponent],
+  imports: [ChordDiagramComponent, MetronomeVisualComponent],
   templateUrl: './practice-runner.page.html',
   styleUrl: './practice-runner.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,7 +30,6 @@ export class PracticeRunnerPage {
   private readonly draft = inject(PracticeDraftService);
   private readonly router = inject(Router);
 
-  protected readonly beats = Array.from({ length: BEATS_PER_BAR }, (_, i) => i);
   protected readonly status = this.session.status;
   protected readonly statusLabel = computed(() => STATUS_LABELS[this.status()]);
   protected readonly isPlaying = computed(() => ['count-in', 'running'].includes(this.status()));
@@ -64,11 +64,6 @@ export class PracticeRunnerPage {
     this.session.currentChord() ? 'Acorde atual' : 'Posicione a mão',
   );
 
-  protected readonly beatLabel = computed(() => {
-    const beat = this.session.beatInBar();
-    return beat === null ? 'Aguardando o primeiro tempo' : `Tempo ${beat + 1} de ${BEATS_PER_BAR}`;
-  });
-
   /** Anúncio para leitores de tela: só muda na troca de acorde. */
   protected readonly announcement = computed(() => {
     const chord = this.session.currentChord();
@@ -83,14 +78,6 @@ export class PracticeRunnerPage {
     const left = this.session.beatsUntilChange();
     const n = this.beatsPerChord();
     return left !== null && (n === 1 || left <= Math.min(2, n - 1));
-  });
-
-  /** Progresso até a troca, em %, avançando a cada tempo. */
-  protected readonly changeProgress = computed(() => {
-    const left = this.session.beatsUntilChange();
-    if (left === null) return 0;
-    const n = this.beatsPerChord();
-    return Math.round(((n - left + 1) / n) * 100);
   });
 
   protected readonly changeCaption = computed(() => {

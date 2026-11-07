@@ -1,0 +1,15 @@
+<div class="row">
+  <svg class="pendulum" viewBox="0 0 64 76" aria-hidden="true">
+    <path class="body" d="M14 72 L26 6 L38 6 L50 72 Z" />
+    <g #arm class="arm">
+      <line x1="32" y1="64" x2="32" y2="10" />
+      <rect class="bob" x="26" y="24" width="12" height="9" rx="2" />
+    </g>
+  </svg>
+  <div class="beats" role="img" [attr.aria-label]="beatLabel()">
+    @for (b of beats; track b) {
+      <span #dot class="beat" [class.accent]="b === 0" [class.on]="beatInBar() === b"></span>
+    }
+  </div>
+</div>
+<div class="bar" aria-hidden="true"><span #fill></span></div>

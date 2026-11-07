@@ -92,7 +92,6 @@ describe('PracticeRunnerPage', () => {
     expect(activeBeat()).toBe(2);
     expect(text('.caption')).toBe('Troca em 2 tempos');
     expect(host.querySelector('.next')?.classList.contains('soon')).toBe(true);
-    expect(host.querySelector<HTMLElement>('.bar span')?.style.width).toBe('75%');
 
     at(8.1);
     expect(text('.big')).toBe('D');

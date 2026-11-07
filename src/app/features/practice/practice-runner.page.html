@@ -59,18 +59,7 @@
         }
 
         <div class="pulse">
-          <div class="beats" role="img" [attr.aria-label]="beatLabel()">
-            @for (b of beats; track b) {
-              <span
-                class="beat"
-                [class.accent]="b === 0"
-                [class.on]="session.beatInBar() === b"
-              ></span>
-            }
-          </div>
-          <div class="bar" aria-hidden="true">
-            <span [style.width.%]="changeProgress()"></span>
-          </div>
+          <app-metronome-visual />
           <p class="caption">{{ changeCaption() }}</p>
         </div>
 
