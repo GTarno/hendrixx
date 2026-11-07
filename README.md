@@ -21,6 +21,9 @@ npm start
 
 O app abre em `http://localhost:4200/`.
 
+Para conferir os diagramas de acordes, abra `http://localhost:4200/dev/acordes`. Essa página
+só existe em desenvolvimento e não entra no build de produção.
+
 ## Scripts
 
 | Comando                 | O que faz                                                    |

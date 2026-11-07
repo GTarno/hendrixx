@@ -190,7 +190,8 @@ RN5 pede a troca no tempo 1, mas o treino sugerido "Troca rápida" usa 1 tempo p
 - Valores que não dividem nem são múltiplos de 4 (3, 5, 6…) ficam fora do MVP. Se forem pedidos, a alternativa é mudar o
   compasso da sessão (3 tempos → 3/4).
 
-### D2. Grafia das notas (em aberto)
+### D2. Grafia das notas (decidida: grafia teórica, por ora)
 
-O catálogo usa a grafia teórica correta (Cb no Db7, E# no F#7M). A alternativa é a grafia mais
-comum em songbooks (B, F). Decisão pendente na issue #10.
+O catálogo mantém a grafia teórica correta (Cb no Db7, E# no F#7M), decidida na issue #10.
+A alternativa, a grafia mais comum em songbooks (B, F), pode ser revista no futuro; a mudança
+seria só no script do catálogo (`tools/build-chord-catalog.mjs`).
