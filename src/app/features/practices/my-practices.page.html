@@ -1,0 +1,96 @@
+<section class="page">
+  <app-practice-tabs />
+
+  @if (!persistent()) {
+    <p class="warn" role="status">
+      Este navegador não está guardando dados (aba privada ou bloqueio). Os treinos salvos somem ao
+      fechar o app.
+    </p>
+  }
+
+  @if (items().length) {
+    <ul class="list">
+      @for (item of items(); track item.practice.id) {
+        <li class="card">
+          @if (renaming() === item.practice.id) {
+            <form class="rename" (submit)="rename($event, item.practice.id)">
+              <label>
+                <span class="sr-only">Novo nome</span>
+                <input
+                  name="name"
+                  type="text"
+                  [value]="item.practice.name"
+                  [maxLength]="maxLength"
+                  autocomplete="off"
+                />
+              </label>
+              <button type="submit" class="primary">Salvar</button>
+              <button type="button" class="secondary" (click)="renaming.set(null)">Cancelar</button>
+            </form>
+          } @else {
+            <h2 class="name">{{ item.practice.name }}</h2>
+          }
+          <p class="summary">{{ item.summary }}</p>
+          <p class="meta">Salvo em {{ item.savedAt }}</p>
+          @if (item.problem) {
+            <p class="problem">{{ item.problem }} Abra em Editar para ajustar.</p>
+          }
+
+          @if (confirmingDelete() === item.practice.id) {
+            <div class="confirm" role="alert">
+              <span>Excluir “{{ item.practice.name }}”?</span>
+              <button type="button" class="danger" (click)="remove(item.practice.id)">
+                Excluir
+              </button>
+              <button type="button" class="secondary" (click)="confirmingDelete.set(null)">
+                Cancelar
+              </button>
+            </div>
+          } @else {
+            <div class="actions">
+              <button
+                type="button"
+                class="primary"
+                [disabled]="!!item.problem"
+                (click)="start(item)"
+                [attr.aria-label]="'Iniciar ' + item.practice.name"
+              >
+                ▶ Iniciar
+              </button>
+              <button
+                type="button"
+                class="secondary"
+                (click)="edit(item)"
+                [attr.aria-label]="'Editar ' + item.practice.name"
+              >
+                Editar
+              </button>
+              <button
+                type="button"
+                class="secondary"
+                (click)="startRename(item.practice.id)"
+                [attr.aria-label]="'Renomear ' + item.practice.name"
+              >
+                Renomear
+              </button>
+              <button
+                type="button"
+                class="secondary"
+                (click)="askDelete(item.practice.id)"
+                [attr.aria-label]="'Excluir ' + item.practice.name"
+              >
+                Excluir
+              </button>
+            </div>
+          }
+        </li>
+      }
+    </ul>
+  } @else {
+    <div class="empty">
+      <h2>Nenhum treino salvo ainda</h2>
+      <p>Monte um treino e toque em <strong>☆ Salvar como treino</strong> para guardar aqui.</p>
+      <a class="primary" routerLink="/">Montar treino</a>
+    </div>
+  }
+</section>

@@ -18,9 +18,10 @@ import { ChordNamingService } from '../../core/preferences/chord-naming.service'
 import { PracticeSessionService } from '../../core/session/practice-session.service';
 import { ChordDiagramComponent } from '../../shared/chord-diagram/chord-diagram.component';
 import { MetronomeVisualComponent } from '../../shared/metronome-visual/metronome-visual.component';
+import { SavePracticeComponent } from '../../shared/save-practice/save-practice.component';
 import { mediaQuerySignal } from '../../shared/media-query';
 import { formatClock } from '../../shared/time-format';
-import { PracticeDraftService } from '../setup/practice-draft.service';
+import { PracticeDraftService, suggestedName } from '../setup/practice-draft.service';
 import { SHORTCUT_HELP, ShortcutAction, shortcutFor } from './shortcuts';
 
 /** Mesma condição do layout compacto em practice-runner.page.scss. */
@@ -37,7 +38,7 @@ const STATUS_LABELS = {
 /** Tela 2: treino em andamento e resumo (docs/wireframes.md, telas 2 e 2b). */
 @Component({
   selector: 'app-practice-runner-page',
-  imports: [ChordDiagramComponent, MetronomeVisualComponent],
+  imports: [ChordDiagramComponent, MetronomeVisualComponent, SavePracticeComponent],
   templateUrl: './practice-runner.page.html',
   styleUrl: './practice-runner.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -140,6 +141,16 @@ export class PracticeRunnerPage {
   protected readonly summaryConfig = computed(() => {
     const chords = this.session.chords().map((c) => this.naming.label(c));
     return `${chords.join(' → ')} · ${this.session.bpm()} bpm`;
+  });
+
+  protected readonly saveName = computed(() => {
+    const config = this.session.config();
+    return config
+      ? suggestedName(
+          config,
+          this.session.chords().map((c) => c.labelCifra),
+        )
+      : '';
   });
 
   protected readonly fasterBpm = computed(() => clampBpm(this.session.bpm() + 5));

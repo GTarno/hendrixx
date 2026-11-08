@@ -234,25 +234,41 @@ h2 {
   position: sticky;
   bottom: 0;
   display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 8px;
   padding: 12px 16px max(12px, env(safe-area-inset-bottom, 0px));
   margin-inline: -16px;
   background: var(--surface);
   border-top: 1px solid var(--line);
+
+  .summary,
+  .blocker,
+  app-save-practice.open,
+  app-save-practice.open + .primary {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (min-width: 840px) {
   .start-bar {
     margin-inline: 0;
     border-radius: var(--radius) var(--radius) 0 0;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto auto;
     align-items: center;
 
+    .summary,
     .blocker {
       grid-column: 1;
     }
-    .primary {
+
+    app-save-practice,
+    app-save-practice.open {
       grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+
+    .primary {
+      grid-column: 3;
       grid-row: 1 / span 2;
       min-width: 220px;
     }

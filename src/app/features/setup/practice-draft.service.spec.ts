@@ -1,5 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { PracticeDraftService, formatDuration, stopText } from './practice-draft.service';
+import { createPracticeConfig } from '../../core/models';
+import { PracticeStorageService } from '../../core/presets/practice-storage.service';
+import {
+  PracticeDraftService,
+  formatDuration,
+  practiceSummary,
+  stopText,
+  suggestedName,
+} from './practice-draft.service';
 
 describe('formatDuration', () => {
   it.each([
@@ -102,5 +110,72 @@ describe('PracticeDraftService', () => {
     expect(draft.config().stop).toEqual({ type: 'cycles', value: 2 });
     draft.stopType.set('minutes');
     expect(draft.config().stop).toEqual({ type: 'minutes', value: 5 });
+  });
+});
+
+describe('PracticeDraftService: carregar treinos', () => {
+  it('carrega uma configuração salva', () => {
+    const draft = TestBed.inject(PracticeDraftService);
+    draft.load({
+      chordIds: ['G', 'Am'],
+      bpm: 72,
+      beatsPerChord: 8,
+      beatsPerBar: 4,
+      order: 'pingpong',
+      stop: { type: 'cycles', value: 5 },
+      countIn: false,
+    });
+    expect(draft.config()).toEqual({
+      chordIds: ['G', 'Am'],
+      bpm: 72,
+      beatsPerChord: 8,
+      beatsPerBar: 4,
+      order: 'pingpong',
+      stop: { type: 'cycles', value: 5 },
+      countIn: false,
+    });
+  });
+
+  it('descarta acordes fora do catálogo liberado e repetidos, e limita valores', () => {
+    const draft = TestBed.inject(PracticeDraftService);
+    draft.load({
+      chordIds: ['C', 'C7', 'C', 'G'],
+      bpm: 400,
+      beatsPerChord: 4,
+      beatsPerBar: 4,
+      order: 'sequential',
+      stop: { type: 'minutes', value: 500 },
+      countIn: true,
+    });
+    expect(draft.chordIds()).toEqual(['C', 'G']);
+    expect(draft.bpm()).toBe(240);
+    expect(draft.stop()).toEqual({ type: 'minutes', value: 60 });
+  });
+
+  it('abre com a última configuração iniciada, se ela ainda for válida', () => {
+    TestBed.inject(PracticeStorageService).rememberLast(
+      createPracticeConfig({ chordIds: ['A', 'D'], bpm: 88 }),
+    );
+    const draft = TestBed.inject(PracticeDraftService);
+    expect(draft.chordIds()).toEqual(['A', 'D']);
+    expect(draft.bpm()).toBe(88);
+  });
+
+  it('ignora a última configuração se ela não for mais válida', () => {
+    TestBed.inject(PracticeStorageService).rememberLast(
+      createPracticeConfig({ chordIds: ['C', 'C7'] }),
+    );
+    expect(TestBed.inject(PracticeDraftService).chordIds()).toEqual(['C', 'D', 'E', 'F']);
+  });
+});
+
+describe('practiceSummary e suggestedName', () => {
+  it('descrevem o treino', () => {
+    const config = createPracticeConfig();
+    expect(practiceSummary(config, ['C', 'D', 'E', 'F'])).toBe(
+      'C → D → E → F · 60 bpm · 4 tempos · sequencial · ≈ 16 s por ciclo · sem fim',
+    );
+    expect(practiceSummary(config, [])).toBe('Nenhum acorde escolhido');
+    expect(suggestedName(config, ['C', 'D', 'E', 'F'])).toBe('C D E F · 60 bpm');
   });
 });

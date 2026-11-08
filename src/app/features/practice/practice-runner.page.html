@@ -19,6 +19,9 @@
         </button>
         <button type="button" class="secondary" (click)="adjust()">Ajustar treino</button>
       </div>
+      @if (session.config(); as config) {
+        <app-save-practice [config]="config" [suggestedName]="saveName()" />
+      }
     </section>
   }
 
