@@ -10,6 +10,7 @@ import {
   cycleDurationSeconds,
   isValidPracticeConfig,
   positionsPerCycle,
+  progressionBpm,
   validatePracticeConfig,
 } from './practice-config.model';
 
@@ -144,5 +145,33 @@ describe('PracticeConfig', () => {
       expect(cycleDurationSeconds(DEFAULT_PRACTICE_CONFIG)).toBe(16);
       expect(cycleDurationSeconds({ ...DEFAULT_PRACTICE_CONFIG, order: 'pingpong' })).toBe(24);
     });
+  });
+});
+
+describe('progressão de BPM', () => {
+  const p = (stepBpm: number, everyCycles: number, targetBpm: number) =>
+    createPracticeConfig({ bpm: 50, bpmProgression: { stepBpm, everyCycles, targetBpm } });
+
+  it('sobe a cada N ciclos completos, sem passar da meta', () => {
+    const config = p(5, 2, 62);
+    expect([0, 1, 2, 3, 4, 5, 6, 20].map((c) => progressionBpm(config, c))).toEqual([
+      50, 50, 55, 55, 60, 60, 62, 62,
+    ]);
+  });
+
+  it('sem progressão, é sempre o BPM do treino', () => {
+    expect(progressionBpm(createPracticeConfig({ bpm: 72 }), 10)).toBe(72);
+  });
+
+  it.each([
+    [p(5, 2, 80), []],
+    [p(0, 2, 80), ['invalid-progression']],
+    [p(25, 2, 80), ['invalid-progression']],
+    [p(5, 0, 80), ['invalid-progression']],
+    [p(5, 11, 80), ['invalid-progression']],
+    [p(5, 2, 50), ['invalid-progression']],
+    [p(5, 2, 241), ['invalid-progression']],
+  ] as [PracticeConfig, PracticeConfigErrorCode[]][])('%j → %j', (config, expected) => {
+    expect(codes(config)).toEqual(expected);
   });
 });

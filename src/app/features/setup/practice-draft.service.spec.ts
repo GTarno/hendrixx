@@ -179,3 +179,61 @@ describe('practiceSummary e suggestedName', () => {
     expect(suggestedName(config, ['C', 'D', 'E', 'F'])).toBe('C D E F · 60 bpm');
   });
 });
+
+describe('PracticeDraftService: progressão de BPM', () => {
+  it('fica fora da configuração até ser ligada', () => {
+    const draft = TestBed.inject(PracticeDraftService);
+    expect(draft.config().bpmProgression).toBeUndefined();
+    draft.setProgressionOn(true);
+    expect(draft.config().bpmProgression).toEqual({ stepBpm: 5, everyCycles: 2, targetBpm: 80 });
+    expect(draft.canStart()).toBe(true);
+  });
+
+  it('ao ligar com o BPM acima da meta, sugere uma meta 20 acima', () => {
+    const draft = TestBed.inject(PracticeDraftService);
+    draft.setBpm(100);
+    draft.setProgressionOn(true);
+    expect(draft.progressionTarget()).toBe(120);
+  });
+
+  it('limita passo, intervalo e meta', () => {
+    const draft = TestBed.inject(PracticeDraftService);
+    draft.setProgressionStep(99);
+    draft.setProgressionEvery(0);
+    draft.setProgressionTarget(999);
+    expect([draft.progressionStep(), draft.progressionEvery(), draft.progressionTarget()]).toEqual([
+      20, 1, 240,
+    ]);
+  });
+
+  it('meta abaixo do BPM impede de começar, com o motivo', () => {
+    const draft = TestBed.inject(PracticeDraftService);
+    draft.setProgressionOn(true);
+    draft.setProgressionTarget(40);
+    expect(draft.canStart()).toBe(false);
+    expect(draft.errors()[0].message).toContain('A meta precisa ser maior');
+  });
+
+  it('carrega e desliga a progressão conforme a configuração', () => {
+    const draft = TestBed.inject(PracticeDraftService);
+    draft.load(
+      createPracticeConfig({
+        bpm: 50,
+        bpmProgression: { stepBpm: 10, everyCycles: 3, targetBpm: 90 },
+      }),
+    );
+    expect(draft.config().bpmProgression).toEqual({ stepBpm: 10, everyCycles: 3, targetBpm: 90 });
+    draft.load(createPracticeConfig());
+    expect(draft.config().bpmProgression).toBeUndefined();
+  });
+
+  it('entra no resumo', () => {
+    const config = createPracticeConfig({
+      bpm: 50,
+      bpmProgression: { stepBpm: 5, everyCycles: 2, targetBpm: 80 },
+    });
+    expect(practiceSummary(config, ['C', 'D', 'E', 'F'])).toContain(
+      'sem fim · sobe 5 bpm a cada 2 ciclos até 80',
+    );
+  });
+});

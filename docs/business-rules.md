@@ -139,6 +139,23 @@ outros). O catálogo está em [`docs/chord-catalog.md`](chord-catalog.md).
 **Escalas** (maior, pentatônica etc.) são um módulo futuro, fora do MVP, com outro tipo de
 diagrama (várias notas por corda ao longo do braço).
 
+## Progressão de BPM
+
+Opcional. O treino começa no BPM escolhido e sobe **X bpm a cada N ciclos**, até uma **meta**.
+
+```
+BPM do ciclo c (a partir de 0) = mín(meta, BPM inicial + X × ⌊c / N⌋)
+```
+
+- A mudança vale a partir do **tempo 1 do novo ciclo**.
+- Ao atingir a meta, o treino segue nela; a parada (RN4) continua valendo à parte.
+- Limites: X de 1 a 20 bpm; N de 1 a 10 ciclos; meta maior que o BPM inicial e no máximo 240.
+- Um ajuste manual de BPM durante o treino vale até o próximo degrau da progressão.
+- "Treinar de novo" recomeça do BPM inicial; "+5 bpm e de novo" sobe o início e a meta.
+
+Exemplo do treino sugerido "Progressão de BPM": 50 bpm, sobe 5 a cada 2 ciclos, meta 80 →
+ciclos 1–2 a 50, 3–4 a 55, 5–6 a 60… até 80 a partir do 13º ciclo.
+
 ## Durante o treino
 
 ### Mudança de BPM ao vivo

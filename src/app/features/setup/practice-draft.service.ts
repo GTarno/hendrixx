@@ -14,6 +14,12 @@ import {
   clampBpm,
   cycleDurationSeconds,
   isBeatsPerChord,
+  BPM_MAX,
+  BPM_MIN,
+  PROGRESSION_EVERY_MAX,
+  PROGRESSION_EVERY_MIN,
+  PROGRESSION_STEP_MAX,
+  PROGRESSION_STEP_MIN,
   validatePracticeConfig,
 } from '../../core/models';
 
@@ -60,6 +66,13 @@ export function practiceSummary(config: PracticeConfig, labels: string[]): strin
     ORDER_LABELS[config.order].toLowerCase(),
     `≈ ${formatDuration(cycle)} por ciclo`,
     stopText(config.stop, cycle),
+    ...(config.bpmProgression
+      ? [
+          `sobe ${config.bpmProgression.stepBpm} bpm a cada ${config.bpmProgression.everyCycles} ${
+            config.bpmProgression.everyCycles === 1 ? 'ciclo' : 'ciclos'
+          } até ${config.bpmProgression.targetBpm}`,
+        ]
+      : []),
   ].join(' · ');
 }
 
@@ -88,6 +101,11 @@ export class PracticeDraftService {
   readonly stopCycles = signal(3);
   readonly stopMinutes = signal(5);
   readonly countIn = signal(DEFAULT_PRACTICE_CONFIG.countIn);
+  /** Progressão de BPM (desligada por padrão). */
+  readonly progressionOn = signal(false);
+  readonly progressionStep = signal(5);
+  readonly progressionEvery = signal(2);
+  readonly progressionTarget = signal(80);
 
   readonly stop = computed<StopCondition>(() => {
     const type = this.stopType();
@@ -104,6 +122,15 @@ export class PracticeDraftService {
     order: this.order(),
     stop: this.stop(),
     countIn: this.countIn(),
+    ...(this.progressionOn()
+      ? {
+          bpmProgression: {
+            stepBpm: this.progressionStep(),
+            everyCycles: this.progressionEvery(),
+            targetBpm: this.progressionTarget(),
+          },
+        }
+      : {}),
   }));
 
   readonly errors = computed(() => validatePracticeConfig(this.config(), this.library.ids()));
@@ -153,6 +180,13 @@ export class PracticeDraftService {
     if (config.stop.type === 'cycles') this.setStopCycles(config.stop.value);
     if (config.stop.type === 'minutes') this.setStopMinutes(config.stop.value);
     this.countIn.set(config.countIn);
+    const p = config.bpmProgression;
+    this.progressionOn.set(!!p);
+    if (p) {
+      this.setProgressionStep(p.stepBpm);
+      this.setProgressionEvery(p.everyCycles);
+      this.setProgressionTarget(p.targetBpm);
+    }
   }
 
   isSelected(id: string): boolean {
@@ -201,6 +235,26 @@ export class PracticeDraftService {
 
   setStopCycles(value: number): void {
     this.stopCycles.set(clampInt(value, STOP_CYCLES_MIN, STOP_CYCLES_MAX));
+  }
+
+  /** Liga a progressão com uma meta acima do BPM atual (+20, até 240). */
+  setProgressionOn(on: boolean): void {
+    if (on && this.progressionTarget() <= this.bpm()) {
+      this.progressionTarget.set(Math.min(BPM_MAX, this.bpm() + 20));
+    }
+    this.progressionOn.set(on);
+  }
+
+  setProgressionStep(value: number): void {
+    this.progressionStep.set(clampInt(value, PROGRESSION_STEP_MIN, PROGRESSION_STEP_MAX));
+  }
+
+  setProgressionEvery(value: number): void {
+    this.progressionEvery.set(clampInt(value, PROGRESSION_EVERY_MIN, PROGRESSION_EVERY_MAX));
+  }
+
+  setProgressionTarget(value: number): void {
+    this.progressionTarget.set(clampInt(value, BPM_MIN, BPM_MAX));
   }
 
   setStopMinutes(value: number): void {

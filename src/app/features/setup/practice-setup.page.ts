@@ -5,6 +5,10 @@ import {
   BEATS_PER_CHORD_OPTIONS,
   BPM_MAX,
   BPM_MIN,
+  PROGRESSION_EVERY_MAX,
+  PROGRESSION_EVERY_MIN,
+  PROGRESSION_STEP_MAX,
+  PROGRESSION_STEP_MIN,
   BeatsPerChord,
   PracticeOrder,
   STOP_CYCLES_MAX,
@@ -25,12 +29,18 @@ import {
   practiceSummary,
   suggestedName,
 } from './practice-draft.service';
+import { SuggestedPracticesComponent } from './suggested-practices.component';
 import { TapTempo } from './tap-tempo';
 
 /** Tela 1: montar treino (docs/wireframes.md). */
 @Component({
   selector: 'app-practice-setup-page',
-  imports: [ChordDiagramComponent, PracticeTabsComponent, SavePracticeComponent],
+  imports: [
+    ChordDiagramComponent,
+    PracticeTabsComponent,
+    SavePracticeComponent,
+    SuggestedPracticesComponent,
+  ],
   templateUrl: './practice-setup.page.html',
   styleUrl: './practice-setup.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,6 +64,10 @@ export class PracticeSetupPage {
     cyclesMax: STOP_CYCLES_MAX,
     minutesMin: STOP_MINUTES_MIN,
     minutesMax: STOP_MINUTES_MAX,
+    stepMin: PROGRESSION_STEP_MIN,
+    stepMax: PROGRESSION_STEP_MAX,
+    everyMin: PROGRESSION_EVERY_MIN,
+    everyMax: PROGRESSION_EVERY_MAX,
   };
 
   protected readonly tapHint = signal(`Entre ${BPM_MIN} e ${BPM_MAX} bpm.`);
@@ -108,6 +122,10 @@ export class PracticeSetupPage {
 
   protected setStopType(type: StopCondition['type']): void {
     this.draft.stopType.set(type);
+  }
+
+  protected setProgressionOn(event: Event): void {
+    this.draft.setProgressionOn((event.target as HTMLInputElement).checked);
   }
 
   protected setCountIn(event: Event): void {

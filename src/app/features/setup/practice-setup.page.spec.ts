@@ -190,4 +190,16 @@ describe('PracticeSetupPage', () => {
         .map((p) => p.name),
     ).toEqual(['C D E F · 60 bpm']);
   });
+
+  it('mostra os treinos sugeridos e a progressão de BPM', () => {
+    const { host, update, text } = render();
+    expect(host.querySelectorAll('app-suggested-practices .card')).toHaveLength(7);
+    const toggle = [...host.querySelectorAll<HTMLInputElement>('input[type=checkbox]')].find((i) =>
+      i.parentElement?.textContent?.includes('Subir o BPM'),
+    );
+    toggle?.click();
+    update();
+    expect(host.querySelector('input[aria-label="BPM da meta"]')).not.toBeNull();
+    expect(text('.summary')).toContain('sobe 5 bpm a cada 2 ciclos até 80');
+  });
 });

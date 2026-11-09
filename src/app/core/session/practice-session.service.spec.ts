@@ -187,4 +187,47 @@ describe('PracticeSessionService', () => {
     expect(names()).toEqual(['G', 'Am']);
     expect(session.elapsedSeconds()).toBe(0);
   });
+
+  describe('progressão de BPM', () => {
+    const diffs = (t: number[]) => t.slice(1).map((v, i) => +(v - t[i]).toFixed(3));
+
+    it('sobe o BPM no tempo 1 de cada novo ciclo, até a meta', () => {
+      const errors = session.start(
+        config({
+          chordIds: ['C', 'G'],
+          beatsPerChord: 1,
+          bpmProgression: { stepBpm: 20, everyCycles: 1, targetBpm: 100 },
+        }),
+      );
+      expect(errors).toEqual([]);
+      at(1.1); // ciclo 1: C, G a 60 bpm
+      expect(metronome.bpm()).toBe(60);
+      at(2.1); // tempo 1 do ciclo 2 (2,05): 80 bpm
+      expect(metronome.bpm()).toBe(80);
+      at(6);
+      expect(metronome.bpm()).toBe(100); // meta
+      // Intervalos: 1 s no ciclo 1, 0,75 s no ciclo 2 e 0,6 s a partir do ciclo 3.
+      expect(diffs(ctx.clickTimes()).slice(0, 5)).toEqual([1, 1, 0.75, 0.75, 0.6]);
+    });
+
+    it('com a meta atingida, continua nela', () => {
+      session.start(
+        config({
+          chordIds: ['C', 'G'],
+          beatsPerChord: 1,
+          bpmProgression: { stepBpm: 20, everyCycles: 1, targetBpm: 70 },
+        }),
+      );
+      at(10);
+      expect(metronome.bpm()).toBe(70);
+    });
+
+    it('sem progressão, o BPM ajustado ao vivo não é desfeito', () => {
+      session.start(config({ chordIds: ['C', 'G'], beatsPerChord: 1 }));
+      at(0.5);
+      session.setBpm(100);
+      at(5);
+      expect(metronome.bpm()).toBe(100);
+    });
+  });
 });

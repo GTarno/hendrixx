@@ -100,6 +100,9 @@
             +5
           </button>
         </div>
+        @if (progressionText(); as text) {
+          <p class="caption">{{ text }}</p>
+        }
 
         <div class="actions">
           <button type="button" class="primary" (click)="togglePause()">

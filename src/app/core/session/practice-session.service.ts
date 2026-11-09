@@ -9,7 +9,13 @@ import {
 } from '@angular/core';
 import { MetronomeService, ScheduledBeat } from '../audio/metronome.service';
 import { ChordLibraryService } from '../chords/chord-library.service';
-import { Chord, PracticeConfig, PracticeConfigError, validatePracticeConfig } from '../models';
+import {
+  Chord,
+  PracticeConfig,
+  PracticeConfigError,
+  progressionBpm,
+  validatePracticeConfig,
+} from '../models';
 import { RandomSource, SessionBeat, SessionPlanner, SessionSummary } from './session-planner';
 
 /** Fonte de aleatoriedade da ordem aleatória (injetável para testes). */
@@ -207,7 +213,21 @@ export class PracticeSessionService {
   private plan(beat: ScheduledBeat): void {
     if (this.phase() !== 'active' || !this.planner) return;
     const planned = this.planner.next(beat.time, beat.duration);
-    if (planned) this.planned.set(beat.index, planned);
+    if (!planned) return;
+    this.planned.set(beat.index, planned);
+    this.applyProgression(planned);
+  }
+
+  /**
+   * Progressão de BPM: no tempo 1 de cada novo ciclo, ajusta o andamento. Como o metrônomo
+   * calcula o próximo clique com o BPM vigente, o novo BPM vale já a partir desse tempo 1.
+   */
+  private applyProgression(beat: SessionBeat): void {
+    const config = this.activeConfig();
+    if (!config?.bpmProgression || beat.kind !== 'chord' || beat.beatInChord !== 0) return;
+    if (beat.position % (this.planner?.sequence.perCycle ?? 1) !== 0) return;
+    const bpm = progressionBpm(config, beat.cycle);
+    if (bpm !== this.metronome.bpm()) this.metronome.setBpm(bpm);
   }
 
   private finish(summary: SessionSummary): void {

@@ -14,11 +14,27 @@ export const STOP_CYCLES_MAX = 99;
 export const STOP_MINUTES_MIN = 1;
 export const STOP_MINUTES_MAX = 60;
 
+/** Limites da progressão de BPM. */
+export const PROGRESSION_STEP_MIN = 1;
+export const PROGRESSION_STEP_MAX = 20;
+export const PROGRESSION_EVERY_MIN = 1;
+export const PROGRESSION_EVERY_MAX = 10;
+
 export type BeatsPerChord = (typeof BEATS_PER_CHORD_OPTIONS)[number];
 export type PracticeOrder = 'sequential' | 'random' | 'pingpong';
 
 export type StopCondition =
   { type: 'infinite' } | { type: 'cycles'; value: number } | { type: 'minutes'; value: number };
+
+/**
+ * Progressão de BPM: começa no BPM do treino e sobe `stepBpm` a cada `everyCycles` ciclos,
+ * até `targetBpm`. A mudança vale a partir do tempo 1 do novo ciclo.
+ */
+export interface BpmProgression {
+  stepBpm: number;
+  everyCycles: number;
+  targetBpm: number;
+}
 
 export interface PracticeConfig {
   /** Ids do catálogo, na ordem do ciclo. Sem repetição; mínimo de 2. */
@@ -32,6 +48,8 @@ export interface PracticeConfig {
   stop: StopCondition;
   /** Compasso de contagem antes do primeiro acorde (RN6). */
   countIn: boolean;
+  /** Subir o BPM ao longo do treino (opcional). */
+  bpmProgression?: BpmProgression;
 }
 
 /** Treino padrão: o "Quarteto básico" do plano. */
@@ -64,7 +82,8 @@ export type PracticeConfigErrorCode =
   | 'unknown-chord'
   | 'invalid-beats-per-chord'
   | 'invalid-beats-per-bar'
-  | 'stop-out-of-range';
+  | 'stop-out-of-range'
+  | 'invalid-progression';
 
 export interface PracticeConfigError {
   field: keyof PracticeConfig;
@@ -137,7 +156,47 @@ export function validatePracticeConfig(
     );
   }
 
+  const progression = config.bpmProgression;
+  if (progression) {
+    const { stepBpm, everyCycles, targetBpm } = progression;
+    if (!inRange(stepBpm, PROGRESSION_STEP_MIN, PROGRESSION_STEP_MAX)) {
+      add(
+        'bpmProgression',
+        'invalid-progression',
+        `Suba de ${PROGRESSION_STEP_MIN} a ${PROGRESSION_STEP_MAX} bpm por vez.`,
+      );
+    }
+    if (!inRange(everyCycles, PROGRESSION_EVERY_MIN, PROGRESSION_EVERY_MAX)) {
+      add(
+        'bpmProgression',
+        'invalid-progression',
+        `Suba a cada ${PROGRESSION_EVERY_MIN} a ${PROGRESSION_EVERY_MAX} ciclos.`,
+      );
+    }
+    if (!Number.isInteger(targetBpm) || targetBpm <= config.bpm || targetBpm > BPM_MAX) {
+      add(
+        'bpmProgression',
+        'invalid-progression',
+        `A meta precisa ser maior que o BPM inicial e no máximo ${BPM_MAX}.`,
+      );
+    }
+  }
+
   return errors;
+}
+
+/**
+ * BPM do ciclo `cycle` (a partir de 0) com a progressão: sobe `stepBpm` a cada
+ * `everyCycles` ciclos completos, sem passar da meta. Sem progressão, é o BPM do treino.
+ */
+export function progressionBpm(
+  config: Pick<PracticeConfig, 'bpm' | 'bpmProgression'>,
+  cycle: number,
+): number {
+  const p = config.bpmProgression;
+  if (!p) return config.bpm;
+  const steps = Math.floor(Math.max(0, cycle) / p.everyCycles);
+  return Math.min(p.targetBpm, config.bpm + steps * p.stepBpm);
 }
 
 export function isValidPracticeConfig(

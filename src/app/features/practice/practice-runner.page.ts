@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 import { FullscreenService } from '../../core/display/fullscreen.service';
 import { StageThemeService } from '../../core/display/stage-theme.service';
 import { WakeLockService } from '../../core/display/wake-lock.service';
-import { clampBpm } from '../../core/models';
+import { BPM_MAX, PracticeConfig, clampBpm } from '../../core/models';
 import { ChordNamingService } from '../../core/preferences/chord-naming.service';
 import { PracticeSessionService } from '../../core/session/practice-session.service';
 import { ChordDiagramComponent } from '../../shared/chord-diagram/chord-diagram.component';
@@ -34,6 +34,25 @@ const STATUS_LABELS = {
   paused: 'Pausado',
   finished: 'Concluído',
 } as const;
+
+/**
+ * Configuração para repetir o treino. Sem progressão, parte do BPM em que terminou (que pode
+ * ter sido ajustado ao vivo). Com progressão, recomeça do BPM inicial; o "+5" sobe início e
+ * meta juntos (a meta fica no máximo 240 e a progressão sai se não sobrar espaço para subir).
+ */
+export function repeatConfig(
+  config: PracticeConfig,
+  finalBpm: number,
+  delta: number,
+): PracticeConfig {
+  const p = config.bpmProgression;
+  if (!p) return { ...config, bpm: clampBpm(finalBpm + delta) };
+  const bpm = clampBpm(config.bpm + delta);
+  const targetBpm = Math.min(BPM_MAX, p.targetBpm + delta);
+  return targetBpm > bpm
+    ? { ...config, bpm, bpmProgression: { ...p, targetBpm } }
+    : { ...config, bpm, bpmProgression: undefined };
+}
 
 /** Tela 2: treino em andamento e resumo (docs/wireframes.md, telas 2 e 2b). */
 @Component({
@@ -153,7 +172,20 @@ export class PracticeRunnerPage {
       : '';
   });
 
-  protected readonly fasterBpm = computed(() => clampBpm(this.session.bpm() + 5));
+  protected readonly fasterBpm = computed(() => {
+    const config = this.session.config();
+    return config
+      ? repeatConfig(config, this.session.bpm(), 5).bpm
+      : clampBpm(this.session.bpm() + 5);
+  });
+
+  /** Texto da progressão de BPM durante o treino, ou null sem progressão. */
+  protected readonly progressionText = computed(() => {
+    const p = this.session.config()?.bpmProgression;
+    return p
+      ? `Subindo ${p.stepBpm} bpm a cada ${p.everyCycles} ${p.everyCycles === 1 ? 'ciclo' : 'ciclos'} até ${p.targetBpm}`
+      : null;
+  });
 
   protected readonly themeLabel = computed(() =>
     this.stageTheme.theme() === 'dark' ? 'Usar tema claro' : 'Usar tema escuro',
@@ -235,9 +267,9 @@ export class PracticeRunnerPage {
   protected again(bpmDelta = 0): void {
     const config = this.session.config();
     if (!config) return;
-    const bpm = clampBpm(this.session.bpm() + bpmDelta);
-    this.draft.setBpm(bpm);
-    this.session.start({ ...config, bpm });
+    const next = repeatConfig(config, this.session.bpm(), bpmDelta);
+    this.draft.load(next);
+    this.session.start(next);
   }
 
   protected adjust(): void {
