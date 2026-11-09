@@ -21,6 +21,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/practice/practice-runner.page').then((m) => m.PracticeRunnerPage),
   },
+  {
+    path: 'instalar',
+    title: 'Instalar o app · Hendrixx',
+    loadComponent: () => import('./features/install/install.page').then((m) => m.InstallPage),
+  },
   ...devRoutes,
   { path: '**', redirectTo: '' },
 ];
