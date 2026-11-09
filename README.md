@@ -45,6 +45,7 @@ só existe em desenvolvimento e não entra no build de produção.
 | `npm start`             | Servidor de desenvolvimento com recarga automática           |
 | `npm run build`         | Build de produção em `dist/hendrixx`                         |
 | `npm run build:pages`   | Build para o GitHub Pages (`/hendrixx/`)                     |
+| `npm run pages:check`   | Confere o site publicado (padrão: GitHub Pages)              |
 | `npm run icons`         | Gera os ícones do PWA a partir de `tools/icons/icon.svg`     |
 | `npm test`              | Testes unitários (Vitest), uma execução                      |
 | `npm run test:watch`    | Testes em modo watch                                         |
@@ -62,6 +63,15 @@ Cada merge na `main` publica o app no GitHub Pages pelo workflow
 
 Na primeira vez, é preciso ativar o Pages no repositório: **Settings → Pages → Build and
 deployment → Source: GitHub Actions**.
+
+### Depois de cada merge
+
+1. O job **Verificar o site publicado** do deploy roda `npm run pages:check`: confere que a
+   página, os scripts, os estilos, o manifesto e o service worker respondem e que um link direto
+   (`/instalar`) abre o app. Se algo faltar, o deploy fica vermelho.
+2. Abra https://gtarno.github.io/hendrixx/ num navegador (celular e computador) e confira as
+   mudanças da PR: as telas alteradas funcionam e não há erros no console. Quem tem o app
+   instalado recebe o aviso de nova versão; recarregue para ver as mudanças.
 
 O roteiro para conferir o app em celulares e no desktop está em
 [`docs/device-testing.md`](docs/device-testing.md).

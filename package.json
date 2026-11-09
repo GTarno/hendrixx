@@ -14,6 +14,7 @@
     "catalog:build": "node tools/build-chord-catalog.mjs",
     "catalog:check": "node tools/build-chord-catalog.mjs --check",
     "build:pages": "ng build --base-href /hendrixx/ && node tools/pages-fallback.mjs",
+    "pages:check": "node tools/check-pages.mjs",
     "icons": "node tools/icons/build-icons.cjs"
   },
   "private": true,
