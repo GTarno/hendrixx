@@ -54,6 +54,10 @@ function isStop(v: unknown): v is StopCondition {
   return (v['type'] === 'cycles' || v['type'] === 'minutes') && isInt(v['value']);
 }
 
+function isProgression(v: unknown): boolean {
+  return isObject(v) && isInt(v['stepBpm']) && isInt(v['everyCycles']) && isInt(v['targetBpm']);
+}
+
 /** Confere a forma de uma configuração guardada (a validação de regras vem ao usar). */
 export function isStoredConfig(v: unknown): v is PracticeConfig {
   return (
@@ -66,7 +70,8 @@ export function isStoredConfig(v: unknown): v is PracticeConfig {
     v['beatsPerBar'] === BEATS_PER_BAR &&
     ORDERS.includes(v['order'] as PracticeOrder) &&
     isStop(v['stop']) &&
-    typeof v['countIn'] === 'boolean'
+    typeof v['countIn'] === 'boolean' &&
+    (v['bpmProgression'] === undefined || isProgression(v['bpmProgression']))
   );
 }
 
@@ -132,6 +137,7 @@ const copyConfig = (c: PracticeConfig): PracticeConfig => ({
   ...c,
   chordIds: [...c.chordIds],
   stop: { ...c.stop },
+  ...(c.bpmProgression ? { bpmProgression: { ...c.bpmProgression } } : {}),
 });
 
 /**

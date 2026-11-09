@@ -343,6 +343,15 @@ describe('PracticeRunnerPage', () => {
     });
   });
 
+  it('mostra a progressão de BPM durante o treino', () => {
+    const { text, at } = render({
+      bpm: 50,
+      bpmProgression: { stepBpm: 5, everyCycles: 2, targetBpm: 80 },
+    });
+    at(1.1);
+    expect(text('.tempo + .caption')).toBe('Subindo 5 bpm a cada 2 ciclos até 80');
+  });
+
   it('sair da tela encerra o treino em andamento', () => {
     const { fixture, at } = render({});
     at(5.1);

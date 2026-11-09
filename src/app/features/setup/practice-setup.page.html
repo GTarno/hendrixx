@@ -1,5 +1,6 @@
 <form class="setup" (submit)="start($event)" novalidate>
   <app-practice-tabs />
+  <app-suggested-practices />
 
   <div class="columns">
     <section class="panel chords-panel" aria-labelledby="chords-title">
@@ -225,6 +226,56 @@
             min
           </label>
         </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Progressão de BPM</legend>
+        <label class="check">
+          <input
+            type="checkbox"
+            [checked]="draft.progressionOn()"
+            (change)="setProgressionOn($event)"
+          />
+          Subir o BPM ao longo do treino
+        </label>
+        @if (draft.progressionOn()) {
+          <p class="progression">
+            Sobe
+            <input
+              class="small-number"
+              type="number"
+              inputmode="numeric"
+              aria-label="Quantos bpm sobe por vez"
+              [min]="limits.stepMin"
+              [max]="limits.stepMax"
+              [value]="draft.progressionStep()"
+              (change)="draft.setProgressionStep(numberFrom($event))"
+            />
+            bpm a cada
+            <input
+              class="small-number"
+              type="number"
+              inputmode="numeric"
+              aria-label="A cada quantos ciclos"
+              [min]="limits.everyMin"
+              [max]="limits.everyMax"
+              [value]="draft.progressionEvery()"
+              (change)="draft.setProgressionEvery(numberFrom($event))"
+            />
+            ciclos, até
+            <input
+              class="small-number"
+              type="number"
+              inputmode="numeric"
+              aria-label="BPM da meta"
+              [min]="limits.bpmMin"
+              [max]="limits.bpmMax"
+              [value]="draft.progressionTarget()"
+              (change)="draft.setProgressionTarget(numberFrom($event))"
+            />
+            bpm
+          </p>
+        }
       </fieldset>
 
       <label class="check">

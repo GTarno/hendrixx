@@ -61,6 +61,30 @@ describe('parseStoredData', () => {
     expect(result.data.last).toBeNull();
   });
 
+  it('aceita treinos com progressão de BPM e recusa progressão malformada', () => {
+    const withProgression = {
+      ...config,
+      bpmProgression: { stepBpm: 5, everyCycles: 2, targetBpm: 80 },
+    };
+    const raw = JSON.stringify({
+      version: 1,
+      practices: [
+        { id: 'a', name: 'Sobe', config: withProgression, createdAt: 'x', updatedAt: 'x' },
+        {
+          id: 'b',
+          name: 'Ruim',
+          config: { ...config, bpmProgression: { stepBpm: 'muito' } },
+          createdAt: 'x',
+          updatedAt: 'x',
+        },
+      ],
+      last: null,
+    });
+    const result = parseStoredData(raw);
+    expect(result.data.practices.map((p) => p.id)).toEqual(['a']);
+    expect(result.data.practices[0].config.bpmProgression?.targetBpm).toBe(80);
+  });
+
   it('migra o formato antigo (lista sem versão)', () => {
     const raw = JSON.stringify([
       { id: 'a', name: 'Antigo', config, createdAt: 'x', updatedAt: 'x' },
