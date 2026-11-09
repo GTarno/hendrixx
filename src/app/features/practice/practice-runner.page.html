@@ -88,7 +88,13 @@
 
         <div class="pulse">
           <app-metronome-visual />
-          <p class="caption">{{ changeCaption() }}</p>
+          <p class="caption">
+            {{ changeCaption() }}
+            @if (compactLayout() && progressionText()) {
+              · meta {{ session.config()?.bpmProgression?.targetBpm }}
+              <span class="sr-only">({{ progressionText() }})</span>
+            }
+          </p>
         </div>
 
         <div class="tempo">
@@ -100,7 +106,7 @@
             +5
           </button>
         </div>
-        @if (progressionText(); as text) {
+        @if (!compactLayout() && progressionText(); as text) {
           <p class="caption">{{ text }}</p>
         }
 

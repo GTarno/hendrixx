@@ -352,6 +352,29 @@ describe('PracticeRunnerPage', () => {
     expect(text('.tempo + .caption')).toBe('Subindo 5 bpm a cada 2 ciclos até 80');
   });
 
+  it('no celular, a meta da progressão vai na linha da troca, sem linha extra', () => {
+    const original = window.matchMedia;
+    window.matchMedia = ((q: string) => ({
+      matches: true,
+      media: q,
+      addEventListener: () => undefined,
+      removeEventListener: () => undefined,
+    })) as unknown as typeof window.matchMedia;
+    try {
+      const { text, at, host } = render({
+        bpm: 50,
+        bpmProgression: { stepBpm: 5, everyCycles: 2, targetBpm: 80 },
+      });
+      at(1.1);
+      expect(host.querySelector('.tempo + .caption')).toBeNull();
+      expect(text('.pulse .caption').replace(/\s+/g, ' ')).toBe(
+        'Troca a cada 4 tempos · meta 80 (Subindo 5 bpm a cada 2 ciclos até 80)',
+      );
+    } finally {
+      window.matchMedia = original;
+    }
+  });
+
   it('sair da tela encerra o treino em andamento', () => {
     const { fixture, at } = render({});
     at(5.1);
