@@ -199,6 +199,18 @@ describe('PracticeRunnerPage', () => {
       expect(TestBed.inject(PracticeDraftService).bpm()).toBe(65);
     });
 
+    it('oferece salvar o treino no resumo', () => {
+      const { at, button, update, host } = render({ countIn: false, chordIds: ['G', 'C'] });
+      at(1.1);
+      button('■ Parar')?.click();
+      update();
+      button('Salvar como treino')?.click();
+      update();
+      expect(host.querySelector<HTMLInputElement>('app-save-practice input')?.value).toBe(
+        'G C · 60 bpm',
+      );
+    });
+
     it('Ajustar treino volta para a tela 1', () => {
       const { at, button, update } = render({ countIn: false });
       at(1.1);

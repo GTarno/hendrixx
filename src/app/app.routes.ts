@@ -10,6 +10,12 @@ export const routes: Routes = [
       import('./features/setup/practice-setup.page').then((m) => m.PracticeSetupPage),
   },
   {
+    path: 'treinos',
+    title: 'Meus treinos · Hendrixx',
+    loadComponent: () =>
+      import('./features/practices/my-practices.page').then((m) => m.MyPracticesPage),
+  },
+  {
     path: 'treino',
     title: 'Treino · Hendrixx',
     loadComponent: () =>

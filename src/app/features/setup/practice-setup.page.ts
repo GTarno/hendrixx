@@ -16,19 +16,21 @@ import {
 import { ChordNamingService } from '../../core/preferences/chord-naming.service';
 import { PracticeSessionService } from '../../core/session/practice-session.service';
 import { ChordDiagramComponent } from '../../shared/chord-diagram/chord-diagram.component';
-import { PracticeDraftService, formatDuration, stopText } from './practice-draft.service';
+import { PracticeStorageService } from '../../core/presets/practice-storage.service';
+import { PracticeTabsComponent } from '../../shared/practice-tabs/practice-tabs.component';
+import { SavePracticeComponent } from '../../shared/save-practice/save-practice.component';
+import {
+  ORDER_LABELS,
+  PracticeDraftService,
+  practiceSummary,
+  suggestedName,
+} from './practice-draft.service';
 import { TapTempo } from './tap-tempo';
-
-const ORDER_LABELS: Record<PracticeOrder, string> = {
-  sequential: 'Sequencial',
-  random: 'Aleatória',
-  pingpong: 'Ping-pong',
-};
 
 /** Tela 1: montar treino (docs/wireframes.md). */
 @Component({
   selector: 'app-practice-setup-page',
-  imports: [ChordDiagramComponent],
+  imports: [ChordDiagramComponent, PracticeTabsComponent, SavePracticeComponent],
   templateUrl: './practice-setup.page.html',
   styleUrl: './practice-setup.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,6 +41,7 @@ export class PracticeSetupPage {
   private readonly library = inject(ChordLibraryService);
   private readonly session = inject(PracticeSessionService);
   private readonly router = inject(Router);
+  private readonly storage = inject(PracticeStorageService);
   private readonly tapTempo = new TapTempo();
 
   protected readonly available = this.library.main;
@@ -58,19 +61,19 @@ export class PracticeSetupPage {
   /** Primeiro problema que impede começar, para mostrar acima do botão. */
   protected readonly blocker = computed(() => this.draft.errors()[0]?.message ?? null);
 
-  protected readonly summary = computed(() => {
-    const chords = this.draft.chords();
-    if (!chords.length) return 'Nenhum acorde escolhido';
-    const n = this.draft.beatsPerChord();
-    return [
-      chords.map((c) => this.naming.label(c)).join(' → '),
-      `${this.draft.bpm()} bpm`,
-      `${n} ${n === 1 ? 'tempo' : 'tempos'}`,
-      ORDER_LABELS[this.draft.order()].toLowerCase(),
-      `≈ ${formatDuration(this.draft.cycleSeconds())} por ciclo`,
-      stopText(this.draft.stop(), this.draft.cycleSeconds()),
-    ].join(' · ');
-  });
+  protected readonly suggestedName = computed(() =>
+    suggestedName(
+      this.draft.config(),
+      this.draft.chords().map((c) => c.labelCifra),
+    ),
+  );
+
+  protected readonly summary = computed(() =>
+    practiceSummary(
+      this.draft.config(),
+      this.draft.chords().map((c) => this.naming.label(c)),
+    ),
+  );
 
   protected numberFrom(event: Event): number {
     return Number((event.target as HTMLInputElement).value);
@@ -119,7 +122,10 @@ export class PracticeSetupPage {
   protected start(event: Event): void {
     event.preventDefault();
     if (!this.draft.canStart()) return;
-    const errors = this.session.start(this.draft.config());
-    if (!errors.length) void this.router.navigate(['/treino']);
+    const config = this.draft.config();
+    const errors = this.session.start(config);
+    if (errors.length) return;
+    this.storage.rememberLast(config);
+    void this.router.navigate(['/treino']);
   }
 }

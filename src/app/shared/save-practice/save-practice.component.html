@@ -1,0 +1,41 @@
+@switch (state()) {
+  @case ('editing') {
+    <div class="form" role="group" aria-label="Salvar como treino">
+      <label class="name">
+        <span>Nome do treino</span>
+        <input
+          #nameInput
+          type="text"
+          [value]="suggestedName()"
+          [maxLength]="maxLength"
+          autocomplete="off"
+          enterkeyhint="done"
+          (keydown.enter)="save($event)"
+          (keydown.escape)="cancel()"
+        />
+      </label>
+      <button type="button" class="primary" (click)="save($event)">Salvar</button>
+      <button type="button" class="secondary" (click)="cancel()">Cancelar</button>
+    </div>
+  }
+  @case ('saved') {
+    <p class="done" role="status">
+      Treino “{{ saved()?.name }}” salvo em <a routerLink="/treinos">Meus treinos</a>.
+      @if (!persistent()) {
+        <span class="warn"> O navegador não está guardando dados: ele some ao fechar o app. </span>
+      }
+      <button type="button" class="link" (click)="again()">Salvar outro</button>
+    </p>
+  }
+  @default {
+    <button
+      type="button"
+      class="secondary save"
+      [disabled]="disabled()"
+      (click)="open()"
+      aria-label="Salvar como treino"
+    >
+      ☆ Salvar
+    </button>
+  }
+}

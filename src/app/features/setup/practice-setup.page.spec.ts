@@ -5,6 +5,7 @@ import { SCHEDULER_TIMER } from '../../core/audio/scheduler-timer';
 import { FakeAudioContext, FakeTimer } from '../../core/audio/testing/fake-audio';
 import { ChordNamingService } from '../../core/preferences/chord-naming.service';
 import { PracticeSessionService } from '../../core/session/practice-session.service';
+import { PracticeStorageService } from '../../core/presets/practice-storage.service';
 import { PracticeSetupPage } from './practice-setup.page';
 
 describe('PracticeSetupPage', () => {
@@ -170,5 +171,23 @@ describe('PracticeSetupPage', () => {
     expect(session.config()?.chordIds).toEqual(['C', 'D', 'E', 'F']);
     expect(TestBed.inject(MetronomeService).isRunning()).toBe(true);
     expect(navigate).toHaveBeenCalledWith(['/treino']);
+    expect(TestBed.inject(PracticeStorageService).last()?.chordIds).toEqual(['C', 'D', 'E', 'F']);
+  });
+
+  it('mostra as abas e salva o treino montado', () => {
+    const { host, button, update } = render();
+    expect(host.querySelector('app-practice-tabs')).not.toBeNull();
+    button('Salvar como treino')?.click();
+    update();
+    expect(host.querySelector<HTMLInputElement>('app-save-practice input')?.value).toBe(
+      'C D E F · 60 bpm',
+    );
+    button('Salvar')?.click();
+    update();
+    expect(
+      TestBed.inject(PracticeStorageService)
+        .practices()
+        .map((p) => p.name),
+    ).toEqual(['C D E F · 60 bpm']);
   });
 });

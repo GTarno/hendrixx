@@ -1,4 +1,6 @@
 <form class="setup" (submit)="start($event)" novalidate>
+  <app-practice-tabs />
+
   <div class="columns">
     <section class="panel chords-panel" aria-labelledby="chords-title">
       <h2 id="chords-title">Acordes do treino ({{ draft.chordIds().length }})</h2>
@@ -237,6 +239,11 @@
     @if (blocker(); as message) {
       <p class="blocker" role="alert">{{ message }}</p>
     }
+    <app-save-practice
+      [config]="draft.config()"
+      [suggestedName]="suggestedName()"
+      [disabled]="!draft.canStart()"
+    />
     <button type="submit" class="primary" [disabled]="!draft.canStart()">▶ Iniciar</button>
   </footer>
 </form>

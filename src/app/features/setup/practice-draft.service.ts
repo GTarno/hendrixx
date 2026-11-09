@@ -1,5 +1,6 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { ChordLibraryService } from '../../core/chords/chord-library.service';
+import { PracticeStorageService } from '../../core/presets/practice-storage.service';
 import {
   BeatsPerChord,
   DEFAULT_PRACTICE_CONFIG,
@@ -12,6 +13,7 @@ import {
   StopCondition,
   clampBpm,
   cycleDurationSeconds,
+  isBeatsPerChord,
   validatePracticeConfig,
 } from '../../core/models';
 
@@ -37,6 +39,35 @@ export function stopText(stop: StopCondition, cycleSeconds: number): string {
   return `${stop.value} min`;
 }
 
+export const ORDER_LABELS: Record<PracticeOrder, string> = {
+  sequential: 'Sequencial',
+  random: 'Aleatória',
+  pingpong: 'Ping-pong',
+};
+
+/**
+ * Resumo do treino em uma linha: "C → D → E → F · 60 bpm · 4 tempos · sequencial ·
+ * ≈ 16 s por ciclo · sem fim". `labels` são os nomes dos acordes no modo escolhido.
+ */
+export function practiceSummary(config: PracticeConfig, labels: string[]): string {
+  if (!labels.length) return 'Nenhum acorde escolhido';
+  const n = config.beatsPerChord;
+  const cycle = cycleDurationSeconds(config);
+  return [
+    labels.join(' → '),
+    `${config.bpm} bpm`,
+    `${n} ${n === 1 ? 'tempo' : 'tempos'}`,
+    ORDER_LABELS[config.order].toLowerCase(),
+    `≈ ${formatDuration(cycle)} por ciclo`,
+    stopText(config.stop, cycle),
+  ].join(' · ');
+}
+
+/** Nome sugerido ao salvar: "C D E F · 60 bpm". */
+export function suggestedName(config: PracticeConfig, labels: string[]): string {
+  return `${labels.join(' ')} · ${config.bpm} bpm`;
+}
+
 const clampInt = (value: number, min: number, max: number) =>
   Number.isFinite(value) ? Math.min(max, Math.max(min, Math.round(value))) : min;
 
@@ -47,6 +78,7 @@ const clampInt = (value: number, min: number, max: number) =>
 @Injectable({ providedIn: 'root' })
 export class PracticeDraftService {
   private readonly library = inject(ChordLibraryService);
+  private readonly storage = inject(PracticeStorageService);
 
   readonly chordIds = signal<string[]>([...DEFAULT_PRACTICE_CONFIG.chordIds]);
   readonly bpm = signal(DEFAULT_PRACTICE_CONFIG.bpm);
@@ -94,6 +126,34 @@ export class PracticeDraftService {
   readonly cycleSeconds = computed(() =>
     this.chordIds().length ? cycleDurationSeconds(this.config()) : 0,
   );
+
+  constructor() {
+    // Abre como estava no último treino iniciado, se ele ainda for válido.
+    const last = this.storage.last();
+    if (last && !validatePracticeConfig(last, this.library.ids()).length) this.load(last);
+  }
+
+  /**
+   * Preenche o rascunho com uma configuração (treino salvo ou sugerido). Acordes que não
+   * estão no catálogo liberado ficam de fora; o resto é limitado às faixas válidas.
+   */
+  load(config: PracticeConfig): void {
+    const known = this.library.ids();
+    this.chordIds.set(
+      config.chordIds.filter((id, i, all) => known.has(id) && all.indexOf(id) === i),
+    );
+    this.setBpm(config.bpm);
+    this.beatsPerChord.set(
+      isBeatsPerChord(config.beatsPerChord)
+        ? config.beatsPerChord
+        : DEFAULT_PRACTICE_CONFIG.beatsPerChord,
+    );
+    this.order.set(config.order);
+    this.stopType.set(config.stop.type);
+    if (config.stop.type === 'cycles') this.setStopCycles(config.stop.value);
+    if (config.stop.type === 'minutes') this.setStopMinutes(config.stop.value);
+    this.countIn.set(config.countIn);
+  }
 
   isSelected(id: string): boolean {
     return this.chordIds().includes(id);
