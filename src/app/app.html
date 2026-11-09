@@ -1,22 +1,29 @@
 <header class="top">
   <a class="brand" routerLink="/">Hendrixx</a>
-  <div class="naming" role="group" aria-label="Nomes dos acordes">
-    <button
-      type="button"
-      [attr.aria-pressed]="naming.naming() === 'cifra'"
-      (click)="naming.set('cifra')"
-      title="Cifra"
-    >
-      C
-    </button>
-    <button
-      type="button"
-      [attr.aria-pressed]="naming.naming() === 'pt'"
-      (click)="naming.set('pt')"
-      title="Português"
-    >
-      Dó
-    </button>
+  <div class="actions">
+    @if (!install.installed()) {
+      <a class="install" routerLink="/instalar" aria-label="Instalar o app" title="Instalar o app"
+        >⤓<span class="install-text">Instalar</span></a
+      >
+    }
+    <div class="naming" role="group" aria-label="Nomes dos acordes">
+      <button
+        type="button"
+        [attr.aria-pressed]="naming.naming() === 'cifra'"
+        (click)="naming.set('cifra')"
+        title="Cifra"
+      >
+        C
+      </button>
+      <button
+        type="button"
+        [attr.aria-pressed]="naming.naming() === 'pt'"
+        (click)="naming.set('pt')"
+        title="Português"
+      >
+        Dó
+      </button>
+    </div>
   </div>
 </header>
 <app-update-banner />

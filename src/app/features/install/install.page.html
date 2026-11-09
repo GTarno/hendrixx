@@ -1,0 +1,63 @@
+<section class="page">
+  <h1>Instalar o app</h1>
+
+  <p class="lead">
+    O Hendrixx funciona inteiro aqui no navegador: não precisa instalar nada para treinar.
+    <a routerLink="/">Montar um treino agora</a>.
+  </p>
+
+  @if (install.installed()) {
+    <p class="note" role="status">Você já está usando o Hendrixx instalado. 🎸</p>
+  } @else {
+    <div class="why">
+      <h2>Por que instalar?</h2>
+      <ul>
+        <li>Ícone na tela inicial, para abrir com um toque.</li>
+        <li>Tela própria, sem a barra do navegador: sobra mais espaço para os diagramas.</li>
+        <li>Funciona sem internet, depois de aberto uma vez com conexão.</li>
+      </ul>
+      <p class="hint">É gratuito, ocupa pouco espaço e não pede nenhuma permissão.</p>
+    </div>
+
+    @if (install.canPrompt()) {
+      <button type="button" class="primary" (click)="installNow()">⤓ Instalar o Hendrixx</button>
+    }
+    @if (outcome(); as text) {
+      <p class="note" role="status">{{ text }}</p>
+    }
+  }
+
+  <h2>Passo a passo</h2>
+  <div class="guides">
+    @for (guide of guides(); track guide.id) {
+      <article class="guide" [class.current]="guide.id === install.platform">
+        <h3>
+          {{ guide.title }}
+          @if (guide.id === install.platform) {
+            <span class="pill">este aparelho</span>
+          }
+        </h3>
+        <p>{{ guide.browser }}</p>
+        <ol>
+          @for (step of guide.steps; track $index) {
+            <li>{{ step }}</li>
+          }
+        </ol>
+        <p class="hint">{{ guide.uninstall }}</p>
+      </article>
+    }
+  </div>
+
+  <h2>Dicas</h2>
+  <ul class="tips">
+    <li>
+      No iPhone e no iPad, use o Safari. Em versões recentes do iOS, o Chrome e o Edge também têm
+      “Adicionar à Tela de Início” no botão Compartilhar.
+    </li>
+    <li>
+      Os treinos salvos ficam no aparelho. O app instalado e o navegador podem guardar listas
+      separadas.
+    </li>
+    <li>O app se atualiza sozinho: quando houver versão nova, aparece um aviso para recarregar.</li>
+  </ul>
+</section>

@@ -9,8 +9,17 @@ metrônomo configurável.
 
 **App publicado:** https://gtarno.github.io/hendrixx/
 
-O app é um PWA: pode ser instalado no celular ou no computador e funciona sem internet depois
-da primeira visita.
+## Usar e instalar
+
+O Hendrixx funciona inteiro no navegador: basta abrir o endereço acima, sem instalar nada.
+
+Se quiser, ele também pode ser instalado como app (PWA), com ícone na tela inicial, tela própria
+e uso sem internet depois da primeira visita. O passo a passo fica dentro do próprio app, em
+[Instalar o app](https://gtarno.github.io/hendrixx/instalar):
+
+- **Android** (Chrome): menu ⋮ → **Instalar app**.
+- **iPhone/iPad** (Safari): **Compartilhar** → **Adicionar à Tela de Início**.
+- **Computador** (Chrome ou Edge): ícone de instalar no fim da barra de endereço.
 
 ## Como rodar
 

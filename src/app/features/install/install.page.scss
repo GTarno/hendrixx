@@ -1,0 +1,83 @@
+:host {
+  display: block;
+}
+
+.page {
+  display: grid;
+  gap: 12px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-inline: max(16px, env(safe-area-inset-left, 0px))
+    max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 24px;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol {
+  margin: 0;
+}
+
+h2 {
+  margin-top: 8px;
+  font-size: 1.15rem;
+}
+
+.lead {
+  font-size: 1.05rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    font-weight: 700;
+    color: inherit;
+  }
+}
+
+.why,
+.guide {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 16px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+}
+
+ul,
+ol {
+  padding-left: 1.3em;
+  display: grid;
+  gap: 4px;
+}
+
+.primary {
+  justify-self: start;
+}
+
+.note {
+  font-weight: 700;
+}
+
+.guides {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+
+.guide.current {
+  border-color: var(--ink);
+  border-width: 2.5px;
+}
+
+h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+}
