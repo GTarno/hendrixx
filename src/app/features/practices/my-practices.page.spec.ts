@@ -125,10 +125,12 @@ describe('MyPracticesPage', () => {
 
   it('não deixa iniciar um treino com acorde fora do catálogo liberado', () => {
     const storage = setup();
-    storage.save('Com C7', createPracticeConfig({ chordIds: ['C', 'C7'] }));
+    storage.save('Com Cadd9', createPracticeConfig({ chordIds: ['C', 'Cadd9'] }));
     const { host, button } = render();
-    expect(button('Iniciar Com C7')?.disabled).toBe(true);
-    expect(host.querySelector('.problem')?.textContent).toContain('Acorde fora do catálogo: C7.');
+    expect(button('Iniciar Com Cadd9')?.disabled).toBe(true);
+    expect(host.querySelector('.problem')?.textContent).toContain(
+      'Acorde fora do catálogo: Cadd9.',
+    );
   });
 
   it('avisa quando o navegador não guarda dados', () => {

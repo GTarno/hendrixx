@@ -6,6 +6,7 @@ import { FakeAudioContext, FakeTimer } from '../../core/audio/testing/fake-audio
 import { ChordNamingService } from '../../core/preferences/chord-naming.service';
 import { PracticeSessionService } from '../../core/session/practice-session.service';
 import { PracticeStorageService } from '../../core/presets/practice-storage.service';
+import { PracticeDraftService } from './practice-draft.service';
 import { PracticeSetupPage } from './practice-setup.page';
 
 describe('PracticeSetupPage', () => {
@@ -201,5 +202,28 @@ describe('PracticeSetupPage', () => {
     update();
     expect(host.querySelector('input[aria-label="BPM da meta"]')).not.toBeNull();
     expect(text('.summary')).toContain('sobe 5 bpm a cada 2 ciclos até 80');
+  });
+
+  it('troca um acorde do ciclo pela variação', () => {
+    const { button, update, $$, text } = render();
+    expect(button('Trocar C por C (Pestana na 3ª casa)')).toBeDefined();
+    button('Trocar F por F (Simplificado)')?.click();
+    update();
+    expect($$('.cycle-name').map((e) => e.textContent?.replace(/\s+/g, ' ').trim())).toEqual([
+      'C',
+      'D',
+      'E',
+      'F Simplificado',
+    ]);
+    expect(text('.summary')).toMatch(/^C → D → E → F \(Simplificado\) ·/);
+    expect(button('Trocar F (Simplificado) por F')).toBeDefined();
+  });
+
+  it('mostra na grade os acordes vindos da biblioteca e o link para ela', () => {
+    TestBed.inject(PracticeDraftService).addChord('Bb7');
+    const { $$, host } = render();
+    expect($$('.chip')).toHaveLength(11);
+    expect($$('.chip-name').at(-1)?.textContent?.trim()).toBe('Bb7');
+    expect(host.querySelector('a[href="/biblioteca"]')?.textContent).toContain('Biblioteca');
   });
 });

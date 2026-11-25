@@ -1,0 +1,88 @@
+<section class="page">
+  <app-practice-tabs />
+
+  <div class="filters">
+    <label class="search">
+      <span class="sr-only">Buscar acorde</span>
+      <input
+        type="search"
+        placeholder="Buscar acorde (ex.: Am, Lá, F#)"
+        autocomplete="off"
+        [value]="query()"
+        (input)="search($event)"
+      />
+    </label>
+
+    <div class="options" role="group" aria-label="Tipo">
+      <button
+        type="button"
+        class="option"
+        [attr.aria-pressed]="quality() === null"
+        (click)="quality.set(null)"
+      >
+        Todos
+      </button>
+      @for (q of qualities; track q.value) {
+        <button
+          type="button"
+          class="option"
+          [attr.aria-pressed]="quality() === q.value"
+          (click)="quality.set(quality() === q.value ? null : q.value)"
+        >
+          {{ q.label }}
+        </button>
+      }
+    </div>
+
+    <div class="options" role="group" aria-label="Dificuldade">
+      @for (d of difficulties; track d.value) {
+        <button
+          type="button"
+          class="option"
+          [attr.aria-pressed]="difficulty() === d.value"
+          (click)="difficulty.set(difficulty() === d.value ? null : d.value)"
+        >
+          <span class="dots" aria-hidden="true">{{ '●'.repeat(d.value) }}</span>
+          {{ d.label }}
+        </button>
+      }
+    </div>
+
+    <p class="hint" role="status">
+      {{ count() }} {{ count() === 1 ? 'acorde' : 'acordes' }}
+      @if (filtered()) {
+        · <button type="button" class="link" (click)="clearFilters()">Limpar filtros</button>
+      }
+    </p>
+  </div>
+
+  @for (g of groups(); track g.group.cifra) {
+    <section
+      class="group"
+      [attr.aria-label]="naming.naming() === 'cifra' ? g.group.cifra : g.group.pt"
+    >
+      <h2>{{ naming.naming() === 'cifra' ? g.group.cifra : g.group.pt }}</h2>
+      <ul class="grid">
+        @for (c of g.chords; track c.id) {
+          <li>
+            <a class="card" [routerLink]="['/biblioteca', c.id]">
+              <app-chord-diagram [chord]="c" size="mini" aria-hidden="true" />
+              <span class="name">{{ naming.label(c) }}</span>
+              <span class="alt">{{ naming.altLabel(c) }}</span>
+              @if (variantCount(c.id); as n) {
+                <span class="extra">+ {{ n }} {{ n === 1 ? 'variação' : 'variações' }}</span>
+              }
+              @if (inPractice(c.id)) {
+                <span class="badge">✓ no treino</span>
+              }
+            </a>
+          </li>
+        }
+      </ul>
+    </section>
+  } @empty {
+    <p class="empty">
+      Nenhum acorde encontrado. Tente a cifra (Am), o nome (Lá menor) ou outro filtro.
+    </p>
+  }
+</section>

@@ -1,0 +1,50 @@
+<section class="page">
+  <a class="back" routerLink="/biblioteca">← Biblioteca</a>
+
+  @if (chord(); as main) {
+    <header class="head">
+      <h1>
+        {{ naming.label(main) }}
+        <span class="alt">{{ naming.altLabel(main) }}</span>
+      </h1>
+      <p class="meta">
+        {{ qualityLabels[main.quality] }} ·
+        <span aria-hidden="true">{{ '●'.repeat(main.difficulty) }}</span>
+        {{ difficultyLabels[main.difficulty] }}
+      </p>
+    </header>
+
+    <ul class="forms">
+      @for (c of forms(); track c.id; let first = $first) {
+        <li class="form">
+          <h2>{{ first ? 'Forma principal' : variantName(c) }}</h2>
+          <app-chord-diagram [chord]="c" size="lg" />
+          <p class="notes">Notas: {{ c.notes.join(' ') }}</p>
+          @if (!first) {
+            <p class="hint">
+              <span aria-hidden="true">{{ '●'.repeat(c.difficulty) }}</span>
+              {{ difficultyLabels[c.difficulty] }}
+            </p>
+          }
+          @if (inPractice(c)) {
+            <p class="badge">✓ Já está no treino</p>
+            <a class="secondary" routerLink="/">Ver o treino</a>
+          } @else {
+            <button
+              type="button"
+              [class]="first ? 'primary' : 'secondary'"
+              (click)="add(c)"
+              [attr.aria-label]="'Adicionar ' + naming.fullLabel(c) + ' ao treino'"
+            >
+              + Adicionar ao treino
+            </button>
+          }
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="empty">
+      Acorde não encontrado. <a routerLink="/biblioteca">Ver todos os acordes</a>.
+    </p>
+  }
+</section>

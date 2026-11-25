@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ChordLibraryService } from '../../core/chords/chord-library.service';
+import { variantShortName } from '../../core/chords/chord-search';
 import {
   BEATS_PER_CHORD_OPTIONS,
   BPM_MAX,
@@ -38,6 +39,7 @@ import { TapTempo } from './tap-tempo';
   imports: [
     ChordDiagramComponent,
     PracticeTabsComponent,
+    RouterLink,
     SavePracticeComponent,
     SuggestedPracticesComponent,
   ],
@@ -54,7 +56,13 @@ export class PracticeSetupPage {
   private readonly storage = inject(PracticeStorageService);
   private readonly tapTempo = new TapTempo();
 
-  protected readonly available = this.library.main;
+  /** Os 10 acordes básicos e, depois, os que vieram da biblioteca (na ordem do ciclo). */
+  protected readonly available = computed(() => {
+    const basic = this.library.basic();
+    const extra = this.draft.chords().filter((c) => !basic.includes(c));
+    return [...basic, ...extra];
+  });
+  protected readonly variantName = variantShortName;
   protected readonly beatOptions = BEATS_PER_CHORD_OPTIONS;
   protected readonly orders = Object.entries(ORDER_LABELS) as [PracticeOrder, string][];
   protected readonly limits = {
@@ -85,7 +93,7 @@ export class PracticeSetupPage {
   protected readonly summary = computed(() =>
     practiceSummary(
       this.draft.config(),
-      this.draft.chords().map((c) => this.naming.label(c)),
+      this.draft.chords().map((c) => this.naming.fullLabel(c)),
     ),
   );
 
