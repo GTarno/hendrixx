@@ -11,8 +11,26 @@
         <ol class="cycle" aria-label="Ordem do ciclo">
           @for (c of cycle.forward; track c.id; let first = $first, last = $last) {
             <li class="cycle-item">
-              <span class="cycle-name">{{ naming.label(c) }}</span>
+              <span class="cycle-name"
+                >{{ naming.label(c) }}
+                @if (variantName(c); as variant) {
+                  <small class="variant">{{ variant }}</small>
+                }
+              </span>
               <span class="cycle-actions">
+                @if (draft.nextVariant(c.id); as next) {
+                  <button
+                    type="button"
+                    class="icon"
+                    (click)="draft.swapVariant(c.id)"
+                    [attr.aria-label]="
+                      'Trocar ' + naming.fullLabel(c) + ' por ' + naming.fullLabel(next)
+                    "
+                    [title]="'Trocar por ' + naming.fullLabel(next)"
+                  >
+                    ⇄
+                  </button>
+                }
                 <button
                   type="button"
                   class="icon"
@@ -68,6 +86,9 @@
             }
             <app-chord-diagram [chord]="c" size="mini" aria-hidden="true" />
             <span class="chip-name">{{ naming.label(c) }}</span>
+            @if (variantName(c); as variant) {
+              <small class="variant">{{ variant }}</small>
+            }
             @if (c.difficulty === 3) {
               <span class="sr-only">, com pestana</span>
             }
@@ -76,6 +97,7 @@
       </div>
 
       <div class="links">
+        <a class="link" routerLink="/biblioteca">Mais acordes na Biblioteca</a>
         <button type="button" class="link" (click)="draft.resetChords()">
           Voltar para C, D, E, F
         </button>

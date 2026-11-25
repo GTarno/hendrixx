@@ -44,10 +44,30 @@ describe('parseChordCatalog', () => {
 });
 
 describe('ChordLibraryService', () => {
-  describe('com o catálogo real (MVP: só a fase 1)', () => {
+  it('libera o catálogo completo por padrão', () => {
+    const library = TestBed.inject(ChordLibraryService);
+    expect(library.unlockedPhase()).toBe(4);
+    expect(library.all()).toHaveLength(71);
+    expect(library.basic().map((c) => c.id)).toEqual(PHASE_1);
+  });
+
+  it('acha o acorde e as variações a partir de qualquer um deles', () => {
+    const library = TestBed.inject(ChordLibraryService);
+    const ids = (id: string) => library.alternativesOf(id).map((c) => c.id);
+    expect(ids('F')).toEqual(['F', 'F-simples']);
+    expect(ids('F-simples')).toEqual(['F', 'F-simples']);
+    expect(ids('Am')).toEqual(['Am', 'Am-pestana5']);
+    expect(ids('Bb')).toEqual(['Bb']);
+    expect(ids('X')).toEqual([]);
+  });
+
+  describe('só com a fase 1 liberada', () => {
     let library: ChordLibraryService;
 
     beforeEach(() => {
+      TestBed.configureTestingModule({
+        providers: [{ provide: UNLOCKED_CATALOG_PHASE, useValue: 1 }],
+      });
       library = TestBed.inject(ChordLibraryService);
     });
 

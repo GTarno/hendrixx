@@ -22,6 +22,17 @@ export const routes: Routes = [
       import('./features/practice/practice-runner.page').then((m) => m.PracticeRunnerPage),
   },
   {
+    path: 'biblioteca',
+    title: 'Biblioteca · Hendrixx',
+    loadComponent: () => import('./features/library/library.page').then((m) => m.LibraryPage),
+  },
+  {
+    path: 'biblioteca/:id',
+    title: 'Acorde · Hendrixx',
+    loadComponent: () =>
+      import('./features/library/chord-detail.page').then((m) => m.ChordDetailPage),
+  },
+  {
     path: 'instalar',
     title: 'Instalar o app · Hendrixx',
     loadComponent: () => import('./features/install/install.page').then((m) => m.InstallPage),

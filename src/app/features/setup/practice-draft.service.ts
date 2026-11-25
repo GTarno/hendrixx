@@ -3,6 +3,7 @@ import { ChordLibraryService } from '../../core/chords/chord-library.service';
 import { PracticeStorageService } from '../../core/presets/practice-storage.service';
 import {
   BeatsPerChord,
+  Chord,
   DEFAULT_PRACTICE_CONFIG,
   PracticeConfig,
   PracticeOrder,
@@ -196,6 +197,33 @@ export class PracticeDraftService {
   /** Adiciona ao fim do ciclo ou remove, se já estiver escolhido. */
   toggleChord(id: string): void {
     this.chordIds.update((ids) => (ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id]));
+  }
+
+  /** Adiciona ao fim do ciclo, se ainda não estiver nele (ex.: vindo da biblioteca). */
+  addChord(id: string): void {
+    if (!this.library.byId(id)) return;
+    this.chordIds.update((ids) => (ids.includes(id) ? ids : [...ids, id]));
+  }
+
+  /**
+   * Próxima forma do acorde para tocar no lugar dele (F → F simplificado → F), pulando as que
+   * já estão no ciclo. `null` se não houver outra.
+   */
+  nextVariant(id: string): Chord | null {
+    const options = this.library.alternativesOf(id);
+    const ids = this.chordIds();
+    const start = options.findIndex((c) => c.id === id);
+    for (let step = 1; step < options.length; step++) {
+      const candidate = options[(start + step) % options.length];
+      if (!ids.includes(candidate.id)) return candidate;
+    }
+    return null;
+  }
+
+  /** Troca o acorde pela próxima forma dele, na mesma posição do ciclo. */
+  swapVariant(id: string): void {
+    const next = this.nextVariant(id);
+    if (next) this.chordIds.update((ids) => ids.map((x) => (x === id ? next.id : x)));
   }
 
   removeChord(id: string): void {

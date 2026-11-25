@@ -46,8 +46,8 @@ describe('PracticeSessionService', () => {
     expect(metronome.isRunning()).toBe(false);
   });
 
-  it('não aceita acordes de fases bloqueadas do catálogo', () => {
-    const errors = session.start(config({ chordIds: ['C', 'C7'] }));
+  it('não aceita acordes fora do catálogo', () => {
+    const errors = session.start(config({ chordIds: ['C', 'Cadd9'] }));
     expect(errors.map((e) => e.code)).toEqual(['unknown-chord']);
   });
 

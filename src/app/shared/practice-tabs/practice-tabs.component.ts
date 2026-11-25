@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { PracticeStorageService } from '../../core/presets/practice-storage.service';
 
-/** Abas "Montar treino" e "Meus treinos". */
+/** Abas "Montar treino", "Meus treinos" e "Biblioteca". */
 @Component({
   selector: 'app-practice-tabs',
   imports: [RouterLink, RouterLinkActive],
   template: `
-    <nav class="tabs" aria-label="Treinos">
+    <nav class="tabs" aria-label="Seções">
       <a
         routerLink="/"
         routerLinkActive="active"
@@ -20,6 +20,9 @@ import { PracticeStorageService } from '../../core/presets/practice-storage.serv
         @if (count()) {
           <span class="count">{{ count() }}</span>
         }
+      </a>
+      <a routerLink="/biblioteca" routerLinkActive="active" ariaCurrentWhenActive="page">
+        Biblioteca
       </a>
     </nav>
   `,

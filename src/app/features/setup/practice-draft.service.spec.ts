@@ -139,7 +139,7 @@ describe('PracticeDraftService: carregar treinos', () => {
   it('descarta acordes fora do catálogo liberado e repetidos, e limita valores', () => {
     const draft = TestBed.inject(PracticeDraftService);
     draft.load({
-      chordIds: ['C', 'C7', 'C', 'G'],
+      chordIds: ['C', 'Cadd9', 'C', 'G'],
       bpm: 400,
       beatsPerChord: 4,
       beatsPerBar: 4,
@@ -163,7 +163,7 @@ describe('PracticeDraftService: carregar treinos', () => {
 
   it('ignora a última configuração se ela não for mais válida', () => {
     TestBed.inject(PracticeStorageService).rememberLast(
-      createPracticeConfig({ chordIds: ['C', 'C7'] }),
+      createPracticeConfig({ chordIds: ['C', 'Cadd9'] }),
     );
     expect(TestBed.inject(PracticeDraftService).chordIds()).toEqual(['C', 'D', 'E', 'F']);
   });
@@ -235,5 +235,34 @@ describe('PracticeDraftService: progressão de BPM', () => {
     expect(practiceSummary(config, ['C', 'D', 'E', 'F'])).toContain(
       'sem fim · sobe 5 bpm a cada 2 ciclos até 80',
     );
+  });
+});
+
+describe('PracticeDraftService: biblioteca e variações', () => {
+  it('adiciona acordes da biblioteca sem repetir', () => {
+    const draft = TestBed.inject(PracticeDraftService);
+    draft.addChord('Bb7');
+    draft.addChord('Bb7');
+    draft.addChord('Cadd9');
+    expect(draft.chordIds()).toEqual(['C', 'D', 'E', 'F', 'Bb7']);
+  });
+
+  it('troca pela variação na mesma posição, e volta', () => {
+    const draft = TestBed.inject(PracticeDraftService);
+    expect(draft.nextVariant('F')?.id).toBe('F-simples');
+    draft.swapVariant('F');
+    expect(draft.chordIds()).toEqual(['C', 'D', 'E', 'F-simples']);
+    draft.swapVariant('F-simples');
+    expect(draft.chordIds()).toEqual(['C', 'D', 'E', 'F']);
+    expect(draft.nextVariant('E')?.id).toBe('E-pestana7');
+    expect(draft.nextVariant('Bb')).toBeNull();
+  });
+
+  it('não troca para uma forma que já está no ciclo', () => {
+    const draft = TestBed.inject(PracticeDraftService);
+    draft.addChord('F-simples');
+    expect(draft.nextVariant('F')).toBeNull();
+    draft.swapVariant('F');
+    expect(draft.chordIds()).toEqual(['C', 'D', 'E', 'F', 'F-simples']);
   });
 });

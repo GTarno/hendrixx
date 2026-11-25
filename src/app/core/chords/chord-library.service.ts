@@ -38,10 +38,13 @@ export const CHORD_CATALOG = new InjectionToken<readonly Chord[]>('CHORD_CATALOG
   factory: () => Object.freeze(parseChordCatalog(catalogData)),
 });
 
-/** Maior fase do catálogo liberada no app. No MVP, só os 10 acordes da fase 1. */
+/** Acordes da fase 1 (10 acordes básicos), oferecidos direto na montagem do treino. */
+export const BASIC_CATALOG_PHASE: CatalogPhase = 1;
+
+/** Maior fase do catálogo liberada no app. Desde a biblioteca completa (#23), todas. */
 export const UNLOCKED_CATALOG_PHASE = new InjectionToken<CatalogPhase>('UNLOCKED_CATALOG_PHASE', {
   providedIn: 'root',
-  factory: () => 1,
+  factory: () => 4,
 });
 
 /**
@@ -82,7 +85,19 @@ export class ChordLibraryService {
     return this.all().filter((c) => c.variantOf === id);
   }
 
-  /** Libera as fases do catálogo até `phase` (usado pela biblioteca completa, fase 6). */
+  /** Acordes principais da fase 1, oferecidos direto na montagem do treino. */
+  readonly basic = computed(() =>
+    this.main().filter((c) => c.catalogPhase === BASIC_CATALOG_PHASE),
+  );
+
+  /** O acorde e as variações dele, a partir de qualquer um dos dois (ex.: F e F simplificado). */
+  alternativesOf(id: string): Chord[] {
+    const mainId = this.byId(id)?.variantOf ?? id;
+    const main = this.byId(mainId);
+    return main ? [main, ...this.variantsOf(mainId)] : [];
+  }
+
+  /** Libera as fases do catálogo até `phase`. */
   unlockUpTo(phase: CatalogPhase): void {
     this.phase.set(phase);
   }

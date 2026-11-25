@@ -79,6 +79,10 @@ O script recusa uma formação quando:
 
 ## Conteúdo por fase
 
+Todas as fases estão liberadas no app desde a Biblioteca (#23). A montagem do treino mostra
+direto os 10 acordes da fase 1; os outros vêm da Biblioteca (busca, filtros e "Adicionar ao
+treino"), e cada acorde do ciclo pode ser trocado pelas variações dele (ex.: F → F simplificado).
+
 ### Fase 1: iniciais (10)
 
 As 7 do PDF mais as 3 menores essenciais para progressões.
